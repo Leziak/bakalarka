@@ -1,0 +1,21 @@
+\babel@toc {english}{}
+\babel@toc {english}{}
+\babel@toc {czech}{}
+\babel@toc {english}{}
+\babel@toc {czech}{}
+\babel@toc {english}{}
+\addvspace {10pt}
+\addvspace {10pt}
+\addvspace {10pt}
+\addvspace {10pt}
+\addvspace {10pt}
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Directory tree of the LearnShell Cluster project}}{23}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Line count of the LearnShell Cluster project}}{24}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Deployments within our cluster}}{27}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces PostgreSQL Helm chart}}{29}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Redis Helm chart}}{31}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Ingress Helm chart}}{33}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Ingress configuration of our cluster}}{34}{figure.4.7}%
+\addvspace {10pt}
+\addvspace {10pt}
+\addvspace {10pt}

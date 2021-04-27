@@ -1,0 +1,58 @@
+This is BibTeX, Version 0.99d (TeX Live 2019/Debian)
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: thesis.aux
+The style file: iso690.bst
+Database file #1: citations.bib
+Warning--entry type for "learnshell-jilek" isn't style-file defined
+--line 1 of file citations.bib
+Warning--entry type for "learnshell-borsky" isn't style-file defined
+--line 75 of file citations.bib
+Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
+Warning--to sort, need author or key in netcraft
+Warning--to sort, need author or key in kube-documentation
+Warning--to sort, need author or key in swarm-pull
+Warning--to sort, need author or key in kube-pull
+Warning--missing publisher in aws-framework
+Warning--empty year in aws-framework
+You've used 28 entries,
+            3146 wiz_defined-function locations,
+            762 strings with 8348 characters,
+and the built_in function-call counts, 8169 in all, are:
+= -- 585
+> -- 172
+< -- 0
++ -- 79
+- -- 48
+* -- 325
+:= -- 951
+add.period$ -- 80
+call.type$ -- 28
+change.case$ -- 100
+chr.to.int$ -- 0
+cite$ -- 34
+duplicate$ -- 798
+empty$ -- 871
+format.name$ -- 48
+if$ -- 1771
+int.to.chr$ -- 0
+int.to.str$ -- 28
+missing$ -- 218
+newline$ -- 113
+num.names$ -- 48
+pop$ -- 615
+preamble$ -- 1
+purify$ -- 80
+quote$ -- 0
+skip$ -- 248
+stack$ -- 0
+substring$ -- 183
+swap$ -- 332
+text.length$ -- 0
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 98
+warning$ -- 6
+while$ -- 48
+width$ -- 30
+write$ -- 231
+(There were 8 warnings)
