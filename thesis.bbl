@@ -8,7 +8,8 @@
 \providecommand{\eprint}[2][]{\biburl{#2}}
 
 \bibitem{learnshell-jilek}
-Jilek, K. Command and Script Testing System for Bash Language. 2018.
+Jílek, K. \emph{Command and Script Testing System for Bash Language}. Czech
+  Technical University in Prague, 2018.
 
 \bibitem{building-microservices}
 Newman, S. \emph{Building Microservices}. O'Reilly media, 2015.
@@ -19,100 +20,124 @@ Lianping, C. \emph{Microservices: Architecting for Continuous Delivery and
   2018.
 
 \bibitem{microservices}
-Fowler, M. Microservices. 2018, [Online].
+Fowler, M. Microservices. [Online]. [cit. 24.4.2021].
 \urlprefix\biburl{https://martinfowler.com/articles/microservices.html}
 
 \bibitem{proxies}
-{The Apache Software Foundation}. Forward and Reverse Proxy. 2010, [Online].
+{The Apache Software Foundation}. Forward and Reverse Proxy. [Online]. [cit.
+  24.4.2021].
 \urlprefix\biburl{http://httpd.apache.org/docs/2.0/mod/mod\_proxy.html}
 
 \bibitem{netcraft}
-Web Server Survey. 2021, [Online].
+Web Server Survey. 2021, [Online]. [cit. 24.4.2021].
 \urlprefix\biburl{https://news.netcraft.com/archives/category/web-server-survey/}
 
 \bibitem{learnshell-borsky}
-Borsky, J. Generátor vstupních dat pro validaci Bash skriptů. 2019.
+Borský, J. \emph{Generátor vstupních dat pro validaci Bash skriptů}. Czech
+  Technical University in Prague, 2019.
 
 \bibitem{unix-handbook}
-et~al., E.~N. \emph{Unix and Linux System Administration Handbook}.
+{Nemeth E. et al.} \emph{Unix and Linux System Administration Handbook}.
   Addison-Wesley, 2018.
 
 \bibitem{virtualization}
 Jain, S.~M. \emph{Linux Containers and Virtualization}. Apress, 2020.
 
 \bibitem{vmware}
-Shankland, S. VMware ready to capitalize on hot server market. 2002, [Online].
+Shankland, S. VMware ready to capitalize on hot server market. [Online]. [cit.
+  4.10.2020].
 \urlprefix\biburl{https://www.cnet.com/news/vmware-ready-to-capitalize-on-hot-server-market}
 
+\bibitem{docker-orchestration}
+Smith, R. \emph{Docker Orchestration}. Packt, 2017.
+
 \bibitem{cloudflare}
-{Cloudflare, inc.} What is the cloud? [Online].
+{Cloudflare, inc.} What is the cloud? [Online]. [cit. 25.4.2021].
 \urlprefix\biburl{https://www.cloudflare.com/learning/cloud/what-is-the-cloud/}
 
 \bibitem{cloud-market}
-Feldman, S. The Cloud Market Keeps Moving Upwards. [Online].
+Feldman, S. The Cloud Market Keeps Moving Upwards. [Online]. [cit. 25.4.2021].
 \urlprefix\biburl{Available on
   https://www.statista.com/chart/19039/cloud-infrastructure-revenue/}
 
 \bibitem{aws-framework}
-{Amazon, inc.} \emph{AWS Well-Architected Framework}. [Online].
+{Amazon, inc.} \emph{AWS Well-Architected Framework}. [Online]. [cit.
+  25.4.2021].
 \urlprefix\biburl{https://docs.aws.amazon.com/wellarchitected/latest/framework/wellarchitected-framework.pdf}
 
 \bibitem{docker-java}
 Krochmalski, J. \emph{Docker and Kubernetes for Java Developers}. Packt, 2017.
 
 \bibitem{docker-phoenix}
-Simic, S. Docker image vs container. 2019, [Online].
+Simic, S. Docker image vs container. [Online]. [cit. 4.10.2020].
 \urlprefix\biburl{https://phoenixnap.com/kb/docker-image-vs-container}
 
 \bibitem{docker-compose-docs}
-{Docker Documentation}. Docker Compose. [Online].
+{Docker, Inc.} Docker Compose. [Online]. [cit. 5.10.2020].
 \urlprefix\biburl{https://docs.docker.com/compose/}
 
 \bibitem{swarm-key-concepts}
-{Docker Documentation}. Swarm mode key concepts. [Online].
+{Docker, Inc.} Swarm mode key concepts. [Online]. [cit. 10.10.2020].
 \urlprefix\biburl{https://docs.docker.com/engine/swarm/key-concepts/}
 
 \bibitem{swarm-nodes}
-{Docker Documentation}. How nodes work. [Online].
+{Docker, Inc.} How nodes work. [Online]. [cit. 5.4.2021].
 \urlprefix\biburl{https://docs.docker.com/engine/swarm/how-swarm-mode-works/nodes/}
 
 \bibitem{kube-documentation}
-{Kubernetes Documentation}. [Online].
+{Google, Inc.} [Online]. [cit. 29.4.2021].
 \urlprefix\biburl{https://kubernetes.io/docs/home/}
 
 \bibitem{medium-kube-history}
 Gunaratne, I. A New Era of Container Cluster Management with Kubernetes.
-  [Online].
+  [Online]. [cit. 8.4.2021].
 \urlprefix\biburl{https://medium.com/containermind/a-new-era-of-container-cluster-management-with-kubernetes-cd0b804e1409}
 
 \bibitem{cncf-kube-graduate}
-Conway, S. Kubernetes is first CNCF project to graduate. [Online].
+Conway, S. Kubernetes is first CNCF project to graduate. [Online]. [cit.
+  9.4.2021].
 \urlprefix\biburl{https://www.cncf.io/blog/2018/03/06/kubernetes-first-cncf-project-graduate}
 
+\bibitem{etcd}
+Juggery, L. A Closer Look at Etcd: The Brain of a Kubernetes Cluster. [Online].
+  [cit. 2.5.2021].
+\urlprefix\biburl{https://betterprogramming.pub/a-closer-look-at-etcd-the-brain-of-a-kubernetes-cluster-788c8ea759a5}
+
+\bibitem{kube-workloads}
+Noland, D. Introduction to Kubernetes Workloads. [Online]. [cit. 2.5.2021].
+\urlprefix\biburl{https://rancher.com/learning-paths/introduction-to-kubernetes-workloads/}
+
 \bibitem{kube-containerd}
-{Kubernetes Blog}. Don't Panic: Kubernetes and Docker. [Online].
+{Kubernetes Blog}. Don't Panic: Kubernetes and Docker. [Online]. [cit.
+  7.4.2021].
 \urlprefix\biburl{https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/}
 
 \bibitem{swarm-pull}
-Swarm-kit Github Repository. [Online].
+Swarm-kit Github Repository. [Online]. [cit. 7.4.2021].
 \urlprefix\biburl{https://github.com/docker/swarmkit/pulls}
 
 \bibitem{kube-pull}
-Kubernetes Github Repository. [Online].
+Kubernetes Github Repository. [Online]. [cit. 7.4.2021].
 \urlprefix\biburl{https://github.com/kubernetes/kubernetes/pulls}
 
 \bibitem{autopilot}
-{Google Kubernetes Engine Documentation}. Autopilot Overview. [Online].
+{Google Kubernetes Engine Documentation}. Autopilot Overview. [Online]. [cit.
+  7.4.2021].
 \urlprefix\biburl{Available on
   https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview}
 
 \bibitem{gitlab-kube}
-Nagy, V. A new era of Kubernetes integrations on GitLab.com. [Online].
+Nagy, V. A new era of Kubernetes integrations on GitLab.com. [Online]. [cit.
+  8.4.2021].
 \urlprefix\biburl{https://about.gitlab.com/blog/2021/02/22/gitlab-kubernetes-agent-on-gitlab-com/}
 
-\bibitem{kube-on-prem}
-Blog, P. Kubernetes On-premises: Why, and how. [Online].
-\urlprefix\biburl{https://platform9.com/blog/kubernetes-on-premises-why-and-how/}
+\bibitem{cloud-native-kube}
+{Arundel J. and Domingus J.} \emph{Cloud Native DevOps with Kubernetes}.
+  O'Reilly, 2019.
+
+\bibitem{cd-guide}
+Wolff, E. \emph{A Practical Guide to Continuous Delivery}. Addison-Wesley,
+  2017.
 
 \bibitem{high-availability}
 van Vugt, S. \emph{Pro Linux High Availability Clustering}. Apress, 2014.

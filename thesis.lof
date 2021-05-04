@@ -7,15 +7,20 @@
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}
+\contentsline {figure}{\numberline {2.1}{\ignorespaces VM-based virtualization with VMware}}{8}{figure.2.1}%
+\contentsline {figure}{\numberline {2.2}{\ignorespaces Container-based virtualization with Docker}}{9}{figure.2.2}%
+\contentsline {figure}{\numberline {2.3}{\ignorespaces Architecture of a Kubernetes cluster}}{15}{figure.2.3}%
 \addvspace {10pt}
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Visualization of typical CI/CD pipelines}}{28}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces CI/CD pipeline}}{29}{figure.3.2}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Directory tree of the LearnShell Cluster project}}{23}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Line count of the LearnShell Cluster project}}{24}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Deployments within our cluster}}{27}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces PostgreSQL Helm chart}}{29}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Redis Helm chart}}{31}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Ingress Helm chart}}{33}{figure.4.6}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Ingress configuration of our cluster}}{34}{figure.4.7}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Directory tree of the LearnShell Cluster project}}{33}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Line count of the LearnShell Cluster project}}{34}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Deployments within our cluster}}{37}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces PostgreSQL Helm chart}}{39}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Redis Helm chart}}{41}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Ingress Helm chart}}{43}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Ingress configuration of our cluster}}{44}{figure.4.7}%
 \addvspace {10pt}
 \addvspace {10pt}
 \addvspace {10pt}

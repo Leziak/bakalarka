@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.3.15)  27 APR 2021 14:39
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.3.15)  3 MAY 2021 08:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -712,7 +712,7 @@ e
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2
 
 ]
-<cvut-logo-bw-en.pdf, id=327, 591.64943pt x 193.23091pt>
+<cvut-logo-bw-en.pdf, id=267, 591.64943pt x 193.23091pt>
 File: cvut-logo-bw-en.pdf Graphic file (type pdf)
 <use cvut-logo-bw-en.pdf>
 Package pdftex.def Info: cvut-logo-bw-en.pdf  used on input line 55.
@@ -779,10 +779,9 @@ LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 8.
  [7
 
-] [8]) [9] [10
+]) [8] (./thesis.lof) [9
 
-] (./thesis.lof)
-[11] [12
+] [10
 
 ]pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
  been already used, duplicate ignored
@@ -799,291 +798,431 @@ l.77 \chapter
 l.77 \chapter
              {Architecture of LearnShell} [2
 
-]
-Underfull \hbox (badness 10000) in paragraph at lines 79--86
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 79--86
-
- []
-
-[3]
-Underfull \vbox (badness 5147) has occurred while \output is active []
+] [3]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [4]
-[5] [6] [7
+[5] [6]
+<./images/virtualization.png, id=454, 405.515pt x 374.39874pt>
+File: ./images/virtualization.png Graphic file (type png)
+<use ./images/virtualization.png>
+Package pdftex.def Info: ./images/virtualization.png  used on input line 150.
+(pdftex.def)             Requested size: 304.13548pt x 280.79837pt.
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [7
 
 ]
+[8pdfTeX warning (ext4): destination with the same identifier (name{figure.2.1}
+) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.156 
+       <./images/virtualization.png>]
+<./images/containerization.png, id=467, 378.41376pt x 280.04625pt>
+File: ./images/containerization.png Graphic file (type png)
+<use ./images/containerization.png>
+Package pdftex.def Info: ./images/containerization.png  used on input line 170.
+
+(pdftex.def)             Requested size: 283.80962pt x 210.03415pt.
+ [9pdfTeX warning (ext4): destination with the same identifier (name{figure.2.2
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.174 
+       <./images/containerization.png>] [10] [11] [12] [13]
+<./images/kube-architecture.png, id=515, 977.6525pt x 560.0925pt>
+File: ./images/kube-architecture.png Graphic file (type png)
+<use ./images/kube-architecture.png>
+Package pdftex.def Info: ./images/kube-architecture.png  used on input line 246
+.
+(pdftex.def)             Requested size: 488.82506pt x 280.04556pt.
+
+Overfull \hbox (65.35289pt too wide) in paragraph at lines 245--247
+ []|  [] 
+ []
+
+
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [8]
-[9] [10] [11] [12] [13] [14
+ [14]
+[15pdfTeX warning (ext4): destination with the same identifier (name{figure.2.3
+}) has been already used, duplicate ignored
 
-] [15]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.256   \item \textbf
+                     {etcd} is a highly complex component that stores the cu...
+ <./images/kube-architecture.png>] [16] [17] [18] [19] [20
 
- [16]
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [17]
-[18] [19] [20] [21
-
-]
-<./images/tree.png, id=633, 363.3575pt x 806.01125pt>
-File: ./images/tree.png Graphic file (type png)
-<use ./images/tree.png>
-Package pdftex.def Info: ./images/tree.png  used on input line 389.
-(pdftex.def)             Requested size: 181.6783pt x 403.00464pt.
-
+] [21]
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [22]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-93.
-
-(/usr/share/texmf/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
-)
-Underfull \vbox (badness 1688) has occurred while \output is active []
-
- [23pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-1}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.396 
-       <./images/tree.png>]
-<./images/line-count.png, id=645, 555.07375pt x 569.12625pt>
-File: ./images/line-count.png Graphic file (type png)
-<use ./images/line-count.png>
-Package pdftex.def Info: ./images/line-count.png  used on input line 399.
-(pdftex.def)             Requested size: 277.53618pt x 284.56242pt.
- [24pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-2}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.408 T
-       o further explain, creating these clusters via Makefile requires thes...
- <./images/line-count.png>]
-<./images/deployment-diagram.png, id=650, 1116.17pt x 1591.9475pt>
-File: ./images/deployment-diagram.png Graphic file (type png)
-<use ./images/deployment-diagram.png>
-Package pdftex.def Info: ./images/deployment-diagram.png  used on input line 44
-5.
-(pdftex.def)             Requested size: 558.08363pt x 795.9718pt.
-
-Overfull \hbox (134.61147pt too wide) in paragraph at lines 444--446
- []|  [] 
- []
-
-
-Underfull \vbox (badness 5388) has occurred while \output is active []
+[23] [24]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [25]
-Underfull \vbox (badness 10000) has occurred while \output is active []
+[26]
+<./images/cicd.png, id=589, 1626.075pt x 610.28pt>
+File: ./images/cicd.png Graphic file (type png)
+<use ./images/cicd.png>
+Package pdftex.def Info: ./images/cicd.png  used on input line 400.
+(pdftex.def)             Requested size: 487.82626pt x 183.0854pt.
 
- [26]
-Overfull \vbox (252.50584pt too high) has occurred while \output is active []
+Overfull \hbox (64.3541pt too wide) in paragraph at lines 399--401
+ []|  [] 
+ []
 
+[27]
+<./images/learnshell-cicd.png, id=595, 794.97pt x 614.295pt>
+File: ./images/learnshell-cicd.png Graphic file (type png)
+<use ./images/learnshell-cicd.png>
+Package pdftex.def Info: ./images/learnshell-cicd.png  used on input line 420.
+(pdftex.def)             Requested size: 397.48402pt x 307.14674pt.
 
-[27pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3
+Overfull \hbox (2.46461pt too wide) in paragraph at lines 419--421
+ []|  [] 
+ []
+
+[28pdfTeX warning (ext4): destination with the same identifier (name{figure.3.1
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.447 
-       <./images/deployment-diagram.png>]
-<./images/postgres-diagram.png, id=665, 1116.17pt x 1591.9475pt>
-File: ./images/postgres-diagram.png Graphic file (type png)
-<use ./images/postgres-diagram.png>
-Package pdftex.def Info: ./images/postgres-diagram.png  used on input line 461.
-
-(pdftex.def)             Requested size: 558.08363pt x 795.9718pt.
-
-Overfull \hbox (219.96971pt too wide) in paragraph at lines 460--462
- []|  [] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [28]
-Overfull \vbox (335.8891pt too high) has occurred while \output is active []
-
-
-[29pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4
-}) has been already used, duplicate ignored
+l.422 
+       <./images/cicd.png>] [29pdfTeX warning (ext4): destination with the same
+ identifier (name{figure.3.2}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.463 
-       <./images/postgres-diagram.png>]
-<./images/redis-diagram.png, id=676, 2232.34pt x 1591.9475pt>
-File: ./images/redis-diagram.png Graphic file (type png)
-<use ./images/redis-diagram.png>
-Package pdftex.def Info: ./images/redis-diagram.png  used on input line 469.
-(pdftex.def)             Requested size: 1116.16728pt x 795.9718pt.
+l.437 \chapter
+              {LearnShell Cluster Implementation} <./images/learnshell-cicd.png
+>] [30
 
-Overfull \hbox (652.86143pt too wide) in paragraph at lines 468--470
- []|  [] 
- []
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
- [30]
-Overfull \vbox (250.17253pt too high) has occurred while \output is active []
-
-
-[31pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5
-}) has been already used, duplicate ignored
-
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.471 
-       <./images/redis-diagram.png>]
-<./images/ingress-diagram.png, id=686, 1116.17pt x 1591.9475pt>
-File: ./images/ingress-diagram.png Graphic file (type png)
-<use ./images/ingress-diagram.png>
-Package pdftex.def Info: ./images/ingress-diagram.png  used on input line 483.
-(pdftex.def)             Requested size: 558.08363pt x 795.9718pt.
-
-Overfull \hbox (219.96971pt too wide) in paragraph at lines 482--484
- []|  [] 
- []
-
+] [31]
+<./images/tree.png, id=622, 342.27875pt x 569.12625pt>
+File: ./images/tree.png Graphic file (type png)
+<use ./images/tree.png>
+Package pdftex.def Info: ./images/tree.png  used on input line 469.
+(pdftex.def)             Requested size: 171.13895pt x 284.56242pt.
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [32]
-Overfull \vbox (316.11723pt too high) has occurred while \output is active []
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 4
+73.
 
+(/usr/share/texmf/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+<./images/line-count.png, id=628, 525.965pt x 423.5825pt>
+File: ./images/line-count.png Graphic file (type png)
+<use ./images/line-count.png>
+Package pdftex.def Info: ./images/line-count.png  used on input line 477.
+(pdftex.def)             Requested size: 262.98184pt x 211.79073pt.
 
-[33pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6
-}) has been already used, duplicate ignored
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [33pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+1}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.485 
-       <./images/ingress-diagram.png>]
-<./images/exposed-services-diagram.png, id=696, 1116.17pt x 795.97375pt>
-File: ./images/exposed-services-diagram.png Graphic file (type png)
-<use ./images/exposed-services-diagram.png>
-Package pdftex.def Info: ./images/exposed-services-diagram.png  used on input l
-ine 491.
-(pdftex.def)             Requested size: 558.08363pt x 397.9859pt.
+l.479 
+       <./images/tree.png>]
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-Overfull \hbox (106.1587pt too wide) in paragraph at lines 490--492
+ [34pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
+2}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.486 
+       <./images/line-count.png>]
+<./images/deployment-diagram.png, id=638, 1116.17pt x 1591.9475pt>
+File: ./images/deployment-diagram.png Graphic file (type png)
+<use ./images/deployment-diagram.png>
+Package pdftex.def Info: ./images/deployment-diagram.png  used on input line 50
+5.
+(pdftex.def)             Requested size: 558.08363pt x 795.9718pt.
+
+Overfull \hbox (134.61147pt too wide) in paragraph at lines 504--506
  []|  [] 
  []
 
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
- [34pdfTeX warning (ext4): destination with the same identifier (name{figure.4.
-7}) has been already used, duplicate ignored
+ [35]
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [36]
+Overfull \vbox (252.50584pt too high) has occurred while \output is active []
+
+
+[37pdfTeX warning (ext4): destination with the same identifier (name{figure.4.3
+}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.517 \chapter
-              {Conclusion} <./images/exposed-services-diagram.png>] [35]
-[36
+l.507 
+       <./images/deployment-diagram.png>]
+<./images/postgres-diagram.png, id=653, 1116.17pt x 1591.9475pt>
+File: ./images/postgres-diagram.png Graphic file (type png)
+<use ./images/postgres-diagram.png>
+Package pdftex.def Info: ./images/postgres-diagram.png  used on input line 521.
 
-] (./thesis.bbl [37] [38
+(pdftex.def)             Requested size: 558.08363pt x 795.9718pt.
+
+Overfull \hbox (219.96971pt too wide) in paragraph at lines 520--522
+ []|  [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [38]
+Overfull \vbox (335.8891pt too high) has occurred while \output is active []
+
+
+[39pdfTeX warning (ext4): destination with the same identifier (name{figure.4.4
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.523 
+       <./images/postgres-diagram.png>]
+<./images/redis-diagram.png, id=663, 2232.34pt x 1591.9475pt>
+File: ./images/redis-diagram.png Graphic file (type png)
+<use ./images/redis-diagram.png>
+Package pdftex.def Info: ./images/redis-diagram.png  used on input line 529.
+(pdftex.def)             Requested size: 1116.16728pt x 795.9718pt.
+
+Overfull \hbox (652.86143pt too wide) in paragraph at lines 528--530
+ []|  [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [40]
+Overfull \vbox (250.17253pt too high) has occurred while \output is active []
+
+
+[41pdfTeX warning (ext4): destination with the same identifier (name{figure.4.5
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.531 
+       <./images/redis-diagram.png>]
+<./images/ingress-diagram.png, id=673, 1116.17pt x 1591.9475pt>
+File: ./images/ingress-diagram.png Graphic file (type png)
+<use ./images/ingress-diagram.png>
+Package pdftex.def Info: ./images/ingress-diagram.png  used on input line 543.
+(pdftex.def)             Requested size: 558.08363pt x 795.9718pt.
+
+Overfull \hbox (219.96971pt too wide) in paragraph at lines 542--544
+ []|  [] 
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [42]
+Overfull \vbox (316.11723pt too high) has occurred while \output is active []
+
+
+[43pdfTeX warning (ext4): destination with the same identifier (name{figure.4.6
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.545 
+       <./images/ingress-diagram.png>]
+<./images/exposed-services-diagram.png, id=684, 1116.17pt x 795.97375pt>
+File: ./images/exposed-services-diagram.png Graphic file (type png)
+<use ./images/exposed-services-diagram.png>
+Package pdftex.def Info: ./images/exposed-services-diagram.png  used on input l
+ine 551.
+(pdftex.def)             Requested size: 558.08363pt x 397.9859pt.
+
+Overfull \hbox (106.1587pt too wide) in paragraph at lines 550--552
+ []|  [] 
+ []
+
+[44pdfTeX warning (ext4): destination with the same identifier (name{figure.4.7
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.560 
+       <./images/exposed-services-diagram.png>]
+<./images/docker-config.png, id=690, 813.0375pt x 211.79124pt>
+File: ./images/docker-config.png Graphic file (type png)
+<use ./images/docker-config.png>
+Package pdftex.def Info: ./images/docker-config.png  used on input line 572.
+(pdftex.def)             Requested size: 406.51776pt x 105.89536pt.
+
+Overfull \hbox (22.87927pt too wide) in paragraph at lines 571--573
+ []|  [] 
+ []
+
+[45 <./images/docker-config.png>]
+Overfull \hbox (2.47417pt too wide) in paragraph at lines 587--588
+\T1/lmr/m/n/10.95 built-in vari-ables CI_REGISTRY_USER, CI_REGISTRY_PASSWORD an
+d
+ []
+
+[46]
+<./images/runner-values.png, id=699, 454.69875pt x 190.7125pt>
+File: ./images/runner-values.png Graphic file (type png)
+<use ./images/runner-values.png>
+Package pdftex.def Info: ./images/runner-values.png  used on input line 611.
+(pdftex.def)             Requested size: 227.34882pt x 95.356pt.
+ [47 <./images/runner-values.png>]
+<./images/gitlab-ci-stages.png, id=704, 210.7875pt x 200.75pt>
+File: ./images/gitlab-ci-stages.png Graphic file (type png)
+<use ./images/gitlab-ci-stages.png>
+Package pdftex.def Info: ./images/gitlab-ci-stages.png  used on input line 627.
+
+(pdftex.def)             Requested size: 105.3935pt x 100.37474pt.
+<./images/gitlab-ci-build.png, id=705, 801.99625pt x 361.35pt>
+File: ./images/gitlab-ci-build.png Graphic file (type png)
+<use ./images/gitlab-ci-build.png>
+Package pdftex.def Info: ./images/gitlab-ci-build.png  used on input line 635.
+(pdftex.def)             Requested size: 400.99713pt x 180.67456pt.
+
+Overfull \hbox (25.89456pt too wide) in paragraph at lines 634--636
+ []|  [] 
+ []
+
+[48 <./images/gitlab-ci-stages.png>]
+<./images/gitlab-ci-deploy.png, id=711, 926.46124pt x 405.515pt>
+File: ./images/gitlab-ci-deploy.png Graphic file (type png)
+<use ./images/gitlab-ci-deploy.png>
+Package pdftex.def Info: ./images/gitlab-ci-deploy.png  used on input line 643.
+
+(pdftex.def)             Requested size: 463.22948pt x 202.75699pt.
+
+Overfull \hbox (82.43645pt too wide) in paragraph at lines 642--644
+ []|  [] 
+ []
+
+[49 <./images/gitlab-ci-build.png> <./images/gitlab-ci-deploy.png>] [50]
+(./thesis.bbl [51
+
+] [52
 
 ]
 bibitemlist
 
-Underfull \hbox (badness 4531) in paragraph at lines 30--32
-[]\T1/lmr/m/n/10.95 Web Server Sur-vey. 2021, [On-line]. Avail-able from: []$\T
-1/lmtt/m/n/10.95 https : / /
+Underfull \hbox (badness 8170) in paragraph at lines 32--34
+[]\T1/lmr/m/n/10.95 Web Server Sur-vey. 2021, [On-line]. [cit. 24.4.2021]. Avai
+l-able
+ []
+
+[53]
+Underfull \hbox (badness 10000) in paragraph at lines 64--67
+\T1/lmr/m/n/10.95 Avail-able from: []$\T1/lmtt/m/n/10.95 https : / / docs\OML/l
+mm/m/it/10.95 :\T1/lmtt/m/n/10.95 aws\OML/lmm/m/it/10.95 :\T1/lmtt/m/n/10.95 am
+azon\OML/lmm/m/it/10.95 :\T1/lmtt/m/n/10.95 com / wellarchitected /
  []
 
 
-Underfull \hbox (badness 1009) in paragraph at lines 52--55
-[]\T1/lmr/m/n/10.95 Feldman, S. The Cloud Mar-ket Keeps Mov-ing Up-wards. [On-l
-ine].
+Underfull \hbox (badness 5403) in paragraph at lines 84--86
+[]\T1/lmr/m/n/10.95 Docker, Inc. How nodes work. [On-line]. [cit. 5.4.2021]. Av
+ail-
  []
 
 
-Underfull \hbox (badness 4316) in paragraph at lines 57--59
-[]\T1/lmr/m/n/10.95 Amazon, inc. \T1/lmr/m/it/10.95 AWS Well-Architected Frame-
-work\T1/lmr/m/n/10.95 . [On-line]. Avail-
- []
-
-[39]
-Underfull \hbox (badness 1275) in paragraph at lines 68--70
-[]\T1/lmr/m/n/10.95 Docker Doc-u-men-ta-tion. Docker Com-pose. [On-line]. Avail
--able from:
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 76--78
-[]$\T1/lmtt/m/n/10.95 https : / / docs\OML/lmm/m/it/10.95 :\T1/lmtt/m/n/10.95 d
-ocker\OML/lmm/m/it/10.95 :\T1/lmtt/m/n/10.95 com / engine / swarm / how -[] swa
-rm -[] mode -[] works /
- []
-
-
-Underfull \hbox (badness 5147) in paragraph at lines 80--82
-[]\T1/lmr/m/n/10.95 Kubernetes Doc-u-men-ta-tion. [On-line]. Avail-able from: [
-]$\T1/lmtt/m/n/10.95 https : / /
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 84--87
-\T1/lmtt/m/n/10.95 a -[] new -[] era -[] of -[] container -[] cluster -[] manag
-ement -[] with -[] kubernetes -[]
- []
-
-
-Underfull \hbox (badness 1412) in paragraph at lines 93--95
-\T1/lmr/m/n/10.95 able from: []$\T1/lmtt/m/n/10.95 https : / / kubernetes\OML/l
-mm/m/it/10.95 :\T1/lmtt/m/n/10.95 io / blog / 2020 / 12 / 02 / dont -[] panic -
-[]
- []
-
-
-Underfull \hbox (badness 1418) in paragraph at lines 97--99
-[]\T1/lmr/m/n/10.95 Swarm-kit Github Repos-i-tory. [On-line]. Avail-able from: 
+Underfull \hbox (badness 2096) in paragraph at lines 88--90
+[]\T1/lmr/m/n/10.95 Google, Inc. [On-line]. [cit. 29.4.2021]. Avail-able from: 
 []$\T1/lmtt/m/n/10.95 https : / /
  []
 
-[40]) [41] [42
 
-] [43] [44
+Underfull \hbox (badness 10000) in paragraph at lines 92--95
+[]\T1/lmr/m/n/10.95 Gunaratne, I. A New Era of Con-tainer Clus-ter Man-age-
+ []
 
-] [45]
+
+Underfull \hbox (badness 4518) in paragraph at lines 92--95
+\T1/lmr/m/n/10.95 ment with Ku-ber-netes. [On-line]. [cit. 8.4.2021]. Avail-abl
+e from:
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 92--95
+[]$\T1/lmtt/m/n/10.95 https : / / medium\OML/lmm/m/it/10.95 :\T1/lmtt/m/n/10.95
+ com / containermind / a -[] new -[] era -[] of -[] container -[]
+ []
+
+
+Underfull \hbox (badness 2393) in paragraph at lines 102--105
+[]\T1/lmr/m/n/10.95 Juggery, L. A Closer Look at Etcd: The Brain of a Ku-ber-
+ []
+
+
+Underfull \hbox (badness 4144) in paragraph at lines 102--105
+\T1/lmr/m/n/10.95 netes Clus-ter. [On-line]. [cit. 2.5.2021]. Avail-able from: 
+[]$\T1/lmtt/m/n/10.95 https :
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 102--105
+\T1/lmtt/m/n/10.95 / / betterprogramming\OML/lmm/m/it/10.95 :\T1/lmtt/m/n/10.95
+ pub / a -[] closer -[] look -[] at -[] etcd -[] the -[] brain -[]
+ []
+
+
+Underfull \hbox (badness 1939) in paragraph at lines 107--109
+[]\T1/lmr/m/n/10.95 Noland, D. In-tro-duc-tion to Ku-ber-netes Work-loads. [On-
+line]. [cit.
+ []
+
+
+Underfull \hbox (badness 2671) in paragraph at lines 107--109
+\T1/lmr/m/n/10.95 2.5.2021]. Avail-able from: []$\T1/lmtt/m/n/10.95 https : / /
+ rancher\OML/lmm/m/it/10.95 :\T1/lmtt/m/n/10.95 com / learning -[] paths /
+ []
+
+[54]) [55] [56
+
+] [57] [58
+
+] [59]
 \tf@toc=\write5
 \openout5 = `thesis.toc'.
 
 \tf@lof=\write6
 \openout6 = `thesis.lof'.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 566.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 566.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 713.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 713.
  (./thesis.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 566.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 566.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 713.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 713.
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: A8D00A4BF2C2AA04DB5D709AB8DB50CA;10752.
+(rerunfilecheck)             Checksum: EA306D4CC76FAB6289A53CD004CD365F;8877.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 566.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 713.
  ) 
 Here is how much of TeX's memory you used:
- 13789 strings out of 482368
- 197305 string characters out of 5941918
- 500950 words of memory out of 5000000
- 28514 multiletter control sequences out of 15000+600000
+ 13858 strings out of 482368
+ 198881 string characters out of 5941918
+ 495084 words of memory out of 5000000
+ 28573 multiletter control sequences out of 15000+600000
  591292 words of font info for 53 fonts, out of 8000000 for 9000
  428 hyphenation exceptions out of 8191
- 40i,11n,33p,1760b,527s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 40i,11n,33p,1761b,527s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/en
 c/dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}</usr/shar
 e/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type1/public/l
@@ -1093,10 +1232,10 @@ mmi10.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/f
 onts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmri10.p
 fb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts
 /type1/public/lm/lmtt10.pfb>
-Output written on thesis.pdf (59 pages, 725921 bytes).
+Output written on thesis.pdf (71 pages, 1055817 bytes).
 PDF statistics:
- 867 PDF objects out of 1000 (max. 8388607)
- 775 compressed objects within 8 object streams
- 177 named destinations out of 1000 (max. 500000)
- 665 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 878 PDF objects out of 1000 (max. 8388607)
+ 763 compressed objects within 8 object streams
+ 187 named destinations out of 1000 (max. 500000)
+ 595 words of extra memory for PDF output out of 10000 (max. 10000000)
 
