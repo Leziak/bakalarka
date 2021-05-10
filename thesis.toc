@@ -74,4 +74,5 @@
 \contentsline {chapter}{Conclusion}{65}{chapter*.9}%
 \contentsline {chapter}{Bibliography}{67}{chapter*.10}%
 \contentsline {appendix}{\chapternumberline {A}Acronyms}{71}{appendix.A}%
-\contentsline {appendix}{\chapternumberline {B}Contents of enclosed CD}{73}{appendix.B}%
+\contentsline {appendix}{\chapternumberline {B}Kubernetes diagram legend}{73}{appendix.B}%
+\contentsline {appendix}{\chapternumberline {C}Contents of enclosed CD}{75}{appendix.C}%

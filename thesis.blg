@@ -12,37 +12,37 @@ Warning--missing publisher in aws-framework
 Warning--empty year in aws-framework
 You've used 42 entries,
             3146 wiz_defined-function locations,
-            825 strings with 10072 characters,
-and the built_in function-call counts, 12507 in all, are:
-= -- 872
+            826 strings with 10172 characters,
+and the built_in function-call counts, 12522 in all, are:
+= -- 874
 > -- 270
 < -- 0
 + -- 123
 - -- 76
-* -- 495
-:= -- 1465
+* -- 498
+:= -- 1467
 add.period$ -- 122
 call.type$ -- 42
 change.case$ -- 151
 chr.to.int$ -- 0
 cite$ -- 48
-duplicate$ -- 1239
-empty$ -- 1343
+duplicate$ -- 1241
+empty$ -- 1345
 format.name$ -- 76
-if$ -- 2707
+if$ -- 2711
 int.to.chr$ -- 0
 int.to.str$ -- 42
 missing$ -- 346
 newline$ -- 164
 num.names$ -- 76
-pop$ -- 964
+pop$ -- 959
 preamble$ -- 1
 purify$ -- 122
 quote$ -- 0
 skip$ -- 371
 stack$ -- 0
 substring$ -- 273
-swap$ -- 512
+swap$ -- 515
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
@@ -50,5 +50,5 @@ type$ -- 140
 warning$ -- 6
 while$ -- 76
 width$ -- 44
-write$ -- 341
+write$ -- 343
 (There were 6 warnings)

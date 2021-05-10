@@ -21,11 +21,13 @@ Maul, F. Locally testing Gitlab CI jobs. [Online]. [cit. 6.5.2021].
 \urlprefix\biburl{https://medium.com/fme-developer-stories/locally-testing-gitlab-ci-jobs-aeb3eb5ec4a8}
 
 \bibitem{learnshell-jilek}
-Jílek, K. \emph{Command and Script Testing System for Bash Language}. Czech
-  Technical University in Prague, 2018.
+Jílek, K. \emph{Command and Script Testing System for Bash Language}.
+  Bachelor's thesis. Czech Technical University in Prague, Faculty of
+  Information Technology, 2018.
 
 \bibitem{building-microservices}
-Newman, S. \emph{Building Microservices}. O'Reilly media, 2015.
+Newman, S. \emph{Building Microservices: Designing Fine-Grained Systems}.
+  O'Reilly media, 2015, ISBN 978-1491950357.
 
 \bibitem{architecting-chen}
 Lianping, C. \emph{Microservices: Architecting for Continuous Delivery and
@@ -33,7 +35,7 @@ Lianping, C. \emph{Microservices: Architecting for Continuous Delivery and
   2018.
 
 \bibitem{microservices}
-Fowler, M. Microservices. [Online]. [cit. 24.4.2021].
+Fowler, M. Microservices. 2014, [Online]. [cit. 24.4.2021].
 \urlprefix\biburl{https://martinfowler.com/articles/microservices.html}
 
 \bibitem{proxies}
@@ -46,8 +48,9 @@ Web Server Survey. 2021, [Online]. [cit. 24.4.2021].
 \urlprefix\biburl{https://news.netcraft.com/archives/category/web-server-survey/}
 
 \bibitem{learnshell-borsky}
-Borský, J. \emph{Generátor vstupních dat pro validaci Bash skriptů}. Czech
-  Technical University in Prague, 2019.
+Borský, J. \emph{Generátor vstupních dat pro validaci Bash skriptů}.
+  Bachelor's thesis. Czech Technical University in Prague, Faculty of
+  Information Technology, 2019.
 
 \bibitem{unix-handbook}
 {Nemeth E. et al.} \emph{Unix and Linux System Administration Handbook}.
