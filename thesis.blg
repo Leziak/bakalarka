@@ -4,51 +4,49 @@ The top-level auxiliary file: thesis.aux
 The style file: iso690.bst
 Database file #1: citations.bib
 Reallocated wiz_functions (elt_size=4) to 6000 items from 3000.
-Warning--to sort, need author or key in netcraft
 Warning--to sort, need author or key in kube-documentation
 Warning--to sort, need author or key in swarm-pull
 Warning--to sort, need author or key in kube-pull
 Warning--missing publisher in aws-framework
-Warning--empty year in aws-framework
 You've used 42 entries,
             3146 wiz_defined-function locations,
-            826 strings with 10172 characters,
-and the built_in function-call counts, 12522 in all, are:
-= -- 874
-> -- 270
+            838 strings with 10308 characters,
+and the built_in function-call counts, 12734 in all, are:
+= -- 900
+> -- 276
 < -- 0
-+ -- 123
-- -- 76
-* -- 498
-:= -- 1467
-add.period$ -- 122
++ -- 124
+- -- 78
+* -- 528
+:= -- 1508
+add.period$ -- 123
 call.type$ -- 42
-change.case$ -- 151
+change.case$ -- 152
 chr.to.int$ -- 0
-cite$ -- 48
-duplicate$ -- 1241
-empty$ -- 1345
-format.name$ -- 76
-if$ -- 2711
+cite$ -- 46
+duplicate$ -- 1266
+empty$ -- 1368
+format.name$ -- 78
+if$ -- 2763
 int.to.chr$ -- 0
 int.to.str$ -- 42
-missing$ -- 346
+missing$ -- 347
 newline$ -- 164
-num.names$ -- 76
-pop$ -- 959
+num.names$ -- 78
+pop$ -- 899
 preamble$ -- 1
-purify$ -- 122
+purify$ -- 123
 quote$ -- 0
-skip$ -- 371
+skip$ -- 374
 stack$ -- 0
-substring$ -- 273
-swap$ -- 515
+substring$ -- 272
+swap$ -- 549
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 140
-warning$ -- 6
-while$ -- 76
+warning$ -- 4
+while$ -- 78
 width$ -- 44
-write$ -- 343
-(There were 6 warnings)
+write$ -- 367
+(There were 4 warnings)

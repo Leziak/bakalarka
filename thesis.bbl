@@ -17,7 +17,7 @@
 \urlprefix\biburl{https://kubernetes.io/docs/concepts/overview/components/}
 
 \bibitem{cicd-diagram}
-Maul, F. Locally testing Gitlab CI jobs. [Online]. [cit. 6.5.2021].
+Maul, F. Locally testing Gitlab CI jobs. 2018, [Online]. [cit. 6.5.2021].
 \urlprefix\biburl{https://medium.com/fme-developer-stories/locally-testing-gitlab-ci-jobs-aeb3eb5ec4a8}
 
 \bibitem{learnshell-jilek}
@@ -27,7 +27,7 @@ Jílek, K. \emph{Command and Script Testing System for Bash Language}.
 
 \bibitem{building-microservices}
 Newman, S. \emph{Building Microservices: Designing Fine-Grained Systems}.
-  O'Reilly media, 2015, ISBN 978-1491950357.
+  O'Reilly media, 2015, ISBN 9781491950357.
 
 \bibitem{architecting-chen}
 Lianping, C. \emph{Microservices: Architecting for Continuous Delivery and
@@ -44,7 +44,7 @@ Fowler, M. Microservices. 2014, [Online]. [cit. 24.4.2021].
 \urlprefix\biburl{http://httpd.apache.org/docs/2.0/mod/mod\_proxy.html}
 
 \bibitem{netcraft}
-Web Server Survey. 2021, [Online]. [cit. 24.4.2021].
+{Netcraft Ltd}. Web Server Survey. 2021, [Online]. [cit. 24.4.2021].
 \urlprefix\biburl{https://news.netcraft.com/archives/category/web-server-survey/}
 
 \bibitem{learnshell-borsky}
@@ -54,45 +54,50 @@ Borský, J. \emph{Generátor vstupních dat pro validaci Bash skriptů}.
 
 \bibitem{unix-handbook}
 {Nemeth E. et al.} \emph{Unix and Linux System Administration Handbook}.
-  Addison-Wesley, 2018.
+  Addison-Wesley, 2018, ISBN 9780134277554.
 
 \bibitem{what-is-high-availability}
-{Digital Ocean, Inc.} What is high availability? [Online]. [cit. 9.5.2021].
+{Digital Ocean, Inc.} What is high availability? 2016, [Online]. [cit.
+  9.5.2021].
 \urlprefix\biburl{https://www.digitalocean.com/community/tutorials/what-is-high-availability}
 
 \bibitem{staging-server}
-Sharma, A. \emph{Test Environment Management}. ITSM Press, 2018.
+Sharma, A. \emph{Test Environment Management}. ITSM Press, 2018, ISBN
+  9781912651269.
 
 \bibitem{virtualization}
-Jain, S.~M. \emph{Linux Containers and Virtualization}. Apress, 2020.
+Jain, S.~M. \emph{Linux Containers and Virtualization}. Apress, 2020, ISBN
+  9781484262832.
 
 \bibitem{vmware}
-Shankland, S. VMware ready to capitalize on hot server market. [Online]. [cit.
-  4.10.2020].
+Shankland, S. VMware ready to capitalize on hot server market. 2002, [Online].
+  [cit. 4.10.2020].
 \urlprefix\biburl{https://www.cnet.com/news/vmware-ready-to-capitalize-on-hot-server-market}
 
 \bibitem{docker-orchestration}
-Smith, R. \emph{Docker Orchestration}. Packt, 2017.
+Smith, R. \emph{Docker Orchestration}. Packt, 2017, ISBN 9781787122123.
 
 \bibitem{cloudflare}
 {Cloudflare, inc.} What is the cloud? [Online]. [cit. 25.4.2021].
 \urlprefix\biburl{https://www.cloudflare.com/learning/cloud/what-is-the-cloud/}
 
 \bibitem{cloud-market}
-Feldman, S. The Cloud Market Keeps Moving Upwards. [Online]. [cit. 25.4.2021].
+Feldman, S. The Cloud Market Keeps Moving Upwards. 2019, [Online]. [cit.
+  25.4.2021].
 \urlprefix\biburl{Available on
   https://www.statista.com/chart/19039/cloud-infrastructure-revenue/}
 
 \bibitem{aws-framework}
-{Amazon, inc.} \emph{AWS Well-Architected Framework}. [Online]. [cit.
+{Amazon, inc.} \emph{AWS Well-Architected Framework}. 2020, [Online]. [cit.
   25.4.2021].
 \urlprefix\biburl{https://docs.aws.amazon.com/wellarchitected/latest/framework/wellarchitected-framework.pdf}
 
 \bibitem{docker-java}
-Krochmalski, J. \emph{Docker and Kubernetes for Java Developers}. Packt, 2017.
+Krochmalski, J. \emph{Docker and Kubernetes for Java Developers}. Packt, 2017,
+  ISBN 9781786468390.
 
 \bibitem{docker-phoenix}
-Simic, S. Docker image vs container. [Online]. [cit. 4.10.2020].
+Simic, S. Docker image vs container. 2019, [Online]. [cit. 4.10.2020].
 \urlprefix\biburl{https://phoenixnap.com/kb/docker-image-vs-container}
 
 \bibitem{docker-compose-docs}
@@ -112,26 +117,27 @@ Simic, S. Docker image vs container. [Online]. [cit. 4.10.2020].
 \urlprefix\biburl{https://kubernetes.io/docs/home/}
 
 \bibitem{medium-kube-history}
-Gunaratne, I. A New Era of Container Cluster Management with Kubernetes.
+Gunaratne, I. A New Era of Container Cluster Management with Kubernetes. 2016,
   [Online]. [cit. 8.4.2021].
 \urlprefix\biburl{https://medium.com/containermind/a-new-era-of-container-cluster-management-with-kubernetes-cd0b804e1409}
 
 \bibitem{cncf-kube-graduate}
-Conway, S. Kubernetes is first CNCF project to graduate. [Online]. [cit.
+Conway, S. Kubernetes is first CNCF project to graduate. 2018, [Online]. [cit.
   9.4.2021].
 \urlprefix\biburl{https://www.cncf.io/blog/2018/03/06/kubernetes-first-cncf-project-graduate}
 
 \bibitem{etcd}
-Juggery, L. A Closer Look at Etcd: The Brain of a Kubernetes Cluster. [Online].
-  [cit. 2.5.2021].
+Juggery, L. A Closer Look at Etcd: The Brain of a Kubernetes Cluster. 2019,
+  [Online]. [cit. 2.5.2021].
 \urlprefix\biburl{https://betterprogramming.pub/a-closer-look-at-etcd-the-brain-of-a-kubernetes-cluster-788c8ea759a5}
 
 \bibitem{kube-workloads}
-Noland, D. Introduction to Kubernetes Workloads. [Online]. [cit. 2.5.2021].
+Noland, D. Introduction to Kubernetes Workloads. 2019, [Online]. [cit.
+  2.5.2021].
 \urlprefix\biburl{https://rancher.com/learning-paths/introduction-to-kubernetes-workloads/}
 
 \bibitem{kube-containerd}
-{Kubernetes Blog}. Don't Panic: Kubernetes and Docker. [Online]. [cit.
+{Kubernetes Blog}. Don't Panic: Kubernetes and Docker. 2020, [Online]. [cit.
   7.4.2021].
 \urlprefix\biburl{https://kubernetes.io/blog/2020/12/02/dont-panic-kubernetes-and-docker/}
 
@@ -150,13 +156,13 @@ Kubernetes Github Repository. [Online]. [cit. 7.4.2021].
   https://cloud.google.com/kubernetes-engine/docs/concepts/autopilot-overview}
 
 \bibitem{gitlab-kube}
-Nagy, V. A new era of Kubernetes integrations on GitLab.com. [Online]. [cit.
-  8.4.2021].
+Nagy, V. A new era of Kubernetes integrations on GitLab.com. 2021, [Online].
+  [cit. 8.4.2021].
 \urlprefix\biburl{https://about.gitlab.com/blog/2021/02/22/gitlab-kubernetes-agent-on-gitlab-com/}
 
 \bibitem{cloud-native-kube}
 {Arundel J. and Domingus J.} \emph{Cloud Native DevOps with Kubernetes}.
-  O'Reilly, 2019.
+  O'Reilly, 2019, ISBN 9781492040767.
 
 \bibitem{using-helm}
 {Helm community}. Using Helm. [Online]. [cit. 10.5.2021].
@@ -167,21 +173,22 @@ Nagy, V. A new era of Kubernetes integrations on GitLab.com. [Online]. [cit.
 \urlprefix\biburl{https://cloud.google.com/container-registry/pricing}
 
 \bibitem{cd-guide}
-Wolff, E. \emph{A Practical Guide to Continuous Delivery}. Addison-Wesley,
-  2017.
+Wolff, E. \emph{Practical Guide to Continuous Delivery}. Addison-Wesley, 2017,
+  ISBN 9780134691473.
 
 \bibitem{high-availability}
-van Vugt, S. \emph{Pro Linux High Availability Clustering}. Apress, 2014.
+van Vugt, S. \emph{Pro Linux High Availability Clustering}. Apress, 2014, ISBN
+  9781484200797.
 
 \bibitem{bitnami}
-{Bitnami blog}. VMWare to acquire Bitnami. [Online]. [cit. 7.5.2021].
+{Bitnami blog}. VMWare to acquire Bitnami. 2019, [Online]. [cit. 7.5.2021].
 \urlprefix\biburl{https://blog.bitnami.com/2019/05/vmware-to-acquire-bitnami.html}
 
 \bibitem{kube-action}
-Lukša, M. \emph{Kubernetes in Action}. Manning, 2017.
+Lukša, M. \emph{Kubernetes in Action}. Manning, 2017, ISBN 9781617293726.
 
 \bibitem{redis}
-Mani, S. Highly available Redis architecture. [Online]. [cit. 9.5.2021].
+Mani, S. Highly available Redis architecture. 2018, [Online]. [cit. 9.5.2021].
 \urlprefix\biburl{https://medium.com/kokster/highly-available-redis-architecture-613c89f887b4}
 
 \end{thebibliography}

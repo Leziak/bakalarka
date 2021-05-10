@@ -631,7 +631,7 @@ After the build process is finished, we are presented with a complete cluster, i
 \includegraphics[scale=0.5]{deployment-diagram}
 \end{figure}
 
-As we can see in this diagram, we have four LearnShell Deployments in total, named respectively web, celery, generator, and backend.
+As we can see in figure 4.2, we have four LearnShell Deployments in total, named respectively web, celery, generator, and backend.
 
 The general workflow of each of our Deployments is as follows:
 
@@ -793,7 +793,7 @@ As in our Deployments, there are four required fields, which fulfill the same fu
 
 The spec field is, as usual, the longest part of our configuration file. In an Ingress resource, it mandatorily contains the rules by which our network should abide when handling requests from outside. However, there are many other options to configure, such as the DNS name that should be translated into the IP address which serves as the root of our application website. In our case, there is no host, but should the cluster be used in practice, it would be set to the current website of the LearnShell portal.
 
-In any case, we command Ingress to route any requests received via the HTTP protocol based on the specified path. The first path, which is \verb|http://<IP address of our Ingress service>/*| uses the asterisk wildcard to redirect any request to the web Pod using port 3000 (on which our JavaScript front end is exposed). In the paths below, special cases, are specified, such as \verb|/admin|. In case the request is made to that path, it is redirected directly to our back end instead. These rules are also used for static files; if the client requests a CSS file within the \verb|/static/admin/css| path, for example, it is retrieved from that very folder inside the container running inside of our backend Pod.
+In any case, we command Ingress to route any requests received via the HTTP protocol based on the specified path. The first path, which translates to \verb|http://<ip addr>/*| uses the asterisk wildcard to redirect any request to the web Pod using port 3000 (on which our JavaScript front end is exposed). In the paths below, special cases, are specified, such as \verb|/admin|. In case the request is made to that path, it is redirected directly to our back end instead. These rules are also used for static files; if the client requests a CSS file within the \verb|/static/admin/css| path, for example, it is retrieved from that very folder inside the container running inside of our backend Pod.
 
 
 \section{Private container registry}
@@ -905,7 +905,7 @@ In the first chapter, we reviewed the current infrastructure architecture of Lea
 
 In order to achieve our aims, we have used many different technologies, though there was a special focus on Docker, Kubernetes, and Gitlab CI for containerization, orchestration, and CI/CD respectively.
 
-The code is available for students and staff on a repository in the Gitlab server of the Czech Technical University in Prague. Moreover, we have organized the containers into private registries on Gitlab and built pipelines around them via Gitlab CI.
+The code is available for students and staff on a repository in the Gitlab server of the Czech Technical University in Prague. Moreover, we have organized the Docker images into private registries on Gitlab and built pipelines around them via Gitlab CI.
 
 While we feel confident that the goals were completed, there is always room for improvement; in this current iteration, the cluster can be used in practice as a staging environment for development, but to be truly production-ready, some additional work would be required, mainly in regards to networking. Nonetheless, we believe that in this state, LearnShell is well-situated to migrate completely to a cluster infrastructure in the near future.
 
@@ -954,14 +954,11 @@ While we feel confident that the goals were completed, there is always room for 
 
 \begin{figure}
 	\dirtree{%
-		.1 readme.txt\DTcomment{the file with CD contents description}.
-		.1 exe\DTcomment{the directory with executables}.
-		.1 src\DTcomment{the directory of source codes}.
-		.2 wbdcm\DTcomment{implementation sources}.
-		.2 thesis\DTcomment{the directory of \LaTeX{} source codes of the thesis}.
-		.1 text\DTcomment{the thesis text directory}.
-		.2 thesis.pdf\DTcomment{the thesis text in PDF format}.
-		.2 thesis.ps\DTcomment{the thesis text in PS format}.
+		.1 readme.txt\DTcomment{description of the contents of the CD}.
+		.1 ls-cluster\DTcomment{repository containing the cluster configuration}.
+		.1 cicd\DTcomment{directory containing gitlab-ci.yml files used for CI/CD}.
+		.1 assignment.pdf\DTcomment{assignment in PDF format}.
+		.1 thesis.pdf\DTcomment{thesis in PDF format}.
 	}
 \end{figure}
 
