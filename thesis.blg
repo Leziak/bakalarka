@@ -10,45 +10,45 @@ Warning--to sort, need author or key in swarm-pull
 Warning--to sort, need author or key in kube-pull
 Warning--missing publisher in aws-framework
 Warning--empty year in aws-framework
-You've used 32 entries,
+You've used 42 entries,
             3146 wiz_defined-function locations,
-            784 strings with 8979 characters,
-and the built_in function-call counts, 9561 in all, are:
-= -- 658
-> -- 200
+            825 strings with 10072 characters,
+and the built_in function-call counts, 12507 in all, are:
+= -- 872
+> -- 270
 < -- 0
-+ -- 93
-- -- 56
-* -- 381
-:= -- 1107
-add.period$ -- 92
-call.type$ -- 32
-change.case$ -- 113
++ -- 123
+- -- 76
+* -- 495
+:= -- 1465
+add.period$ -- 122
+call.type$ -- 42
+change.case$ -- 151
 chr.to.int$ -- 0
-cite$ -- 38
-duplicate$ -- 957
-empty$ -- 1039
-format.name$ -- 56
-if$ -- 2073
+cite$ -- 48
+duplicate$ -- 1239
+empty$ -- 1343
+format.name$ -- 76
+if$ -- 2707
 int.to.chr$ -- 0
-int.to.str$ -- 32
-missing$ -- 268
-newline$ -- 126
-num.names$ -- 56
-pop$ -- 738
+int.to.str$ -- 42
+missing$ -- 346
+newline$ -- 164
+num.names$ -- 76
+pop$ -- 964
 preamble$ -- 1
-purify$ -- 92
+purify$ -- 122
 quote$ -- 0
-skip$ -- 291
+skip$ -- 371
 stack$ -- 0
-substring$ -- 207
-swap$ -- 394
+substring$ -- 273
+swap$ -- 512
 text.length$ -- 0
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 104
+type$ -- 140
 warning$ -- 6
-while$ -- 56
-width$ -- 34
-write$ -- 261
+while$ -- 76
+width$ -- 44
+write$ -- 341
 (There were 6 warnings)

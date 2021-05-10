@@ -6,7 +6,7 @@
 % options:
 % thesis=B bachelor's thesis
 % thesis=M master's thesis
-% czech thesis in Czech language
+% czech thesis in Czech languagef
 % english thesis in English language
 % hidelinks remove colour boxes around hyperlinks
 
@@ -25,6 +25,8 @@
 \usepackage{tocbibind}
 \usepackage[T1]{fontenc}
 \usepackage{float}
+\usepackage{pdfpages}
+
 \graphicspath{ {./images/} }
 
 % % list of acronyms
@@ -42,17 +44,20 @@
 \authorFN{Majoroš} %author's surname
 \author{Samuel Majoroš} %author's name without academic degrees
 \authorWithDegrees{Samuel Majoroš} %author's name with academic degrees
-\supervisor{Jakub Žitný}
+\supervisor{Ing. Jakub Žitný}
 \abstractEN{The main goal of this thesis is to present a functional cluster infrastructure for the LearnShell 2.0 project used by the Czech Technical University in Prague. To achieve this, we have described the current infrastructure and scrutinized today's pre-eminent technologies for container orchestration. As a result, we present a basic cluster on which the LearnShell project is to be hosted, and have also defined CI/CD routines for the services contained therein by utilizing Gitlab CI. We have documented our code thoroughly and display our code in a separate repository.}
 \abstractCS{Hlavným cieľom tejto práce je uvedenie funkčnej klastrovej infraštruktúry pre projekt LearnShell 2.0, ktorý je používaný Českou Technickou Univerzitou v Prahe. Aby sme dosiahli tento cieľ, najprv sme opísali súčasnú infraštruktúru a posúdili dnešné najznámejšie technológie pre kontajnerovú orchestráciu. Výsledkom je jednoduchý klaster, na ktorom bude LearnShell hostovaný, a zadefinovaný je CI/CD proces pre v klastri existujúce servisy. Náš kód pozorne zdokumentovali a kód uvádzame vo svojom vlastnom repozitári.}
 \placeForDeclarationOfAuthenticity{Prague}
 \keywordsCS{Kubernetes, Helm, Docker, Docker Swarm, Gitlab CI, Google Cloud, Linux, LearnShell}
 \keywordsEN{Kubernetes, Helm, Docker, Docker Swarm, Gitlab CI, Google Cloud, Linux, LearnShell}
 \declarationOfAuthenticityOption{1} %select as appropriate, according to the desired license (integer 1-6)
-% \website{http://site.example/thesis} %optional thesis URL
+% \website{https://gitlab.fit.cvut.cz/learnshell-2.0/ls-cluster/tree/majorsam} %optional thesis URL
+
 
 
 \begin{document}
+
+
 
 % \newacronym{CVUT}{{\v C}VUT}{{\v C}esk{\' e} vysok{\' e} u{\v c}en{\' i} technick{\' e} v Praze}
 % \newacronym{FIT}{FIT}{Fakulta informa{\v c}n{\' i}ch technologi{\' i}}
@@ -60,7 +65,7 @@
 \setsecnumdepth{part}
 \chapter{Introduction}
 
-As we become ever reliant on internet-based technology in our daily lives, it stands to reason that there is a pervasive demand on software that is safe, accessible, and most importantly, dependable. More and more, we are growing accustomed to using the internet for even the most trivial of things, such as ordering food, or looking up the correct spelling of certain words. Therefore, web applications are ever increasingly throttled by an uncountable amount of requests from users, and it is of great importance that technology adapts to this challenge by employing new methods of creating an infrastructure that is scalable in a way that makes it impossible to be overwhelmed by too many requests to the point of system failure. In this thesis, we shall attempt to explain the theory behind, as well as the need for, containerization and orchestration as catch-all solutions to many problems troubling today's web applications. More specifically, we shall try and implement a basic cluster, on which the LearnShell portal of the Czech Technical University in Prague could run in the near future. 
+As we become ever reliant on internet-based technology in our daily lives, it stands to reason that there is a pervasive demand on software that is safe, accessible, and most importantly, dependable. More and more, we are growing accustomed to using the internet for even the most trivial of things, such as ordering food, or looking up the correct spelling of certain words. Therefore, web applications are ever increasingly throttled by an uncountable amount of requests from users, and it is of great importance that technology adapts to this challenge by employing new methods of creating an infrastructure that is scalable in a way that makes it impossible to be overwhelmed by too many requests to the point of system failure. In this thesis, we shall attempt to explain the theory behind, as well as the need for, containerization and orchestration as catch-all solutions to many problems troubling today's web applications. More specifically, we shall try and implement a basic cluster on which the LearnShell portal of the Czech Technical University in Prague could run in the near future. 
 
 In summary, these will be the main goals of the thesis:
 \begin{itemize}
@@ -68,9 +73,13 @@ In summary, these will be the main goals of the thesis:
   \item Analyze the current infrastructure architecture of LearnShell.
   \item Explain the virtues of containerization and orchestration, as well as their history.
   \item Compare existing orchestration technologies used in practice as well as their suitability for orchestrating LearnShell containers.
-  \item Implement a basic cluster, based on cutting edge orchestration systems.
-  \item Explore implementation of continous integration and continuous deployment in LearnShell, specifically the newly created cluster.
+  \item Implement a basic cluster based on cutting edge orchestration systems.
+  \item Explore implementation of continuous integration and continuous deployment in LearnShell, specifically the newly created cluster.
 \end{itemize}
+
+\section{Motivation}
+
+This thesis is motivated by current inefficencies in the LearnShell system related to scalability, availability and load balancing, as well as the current absence of complex logging, monitoring and reporting. By researching current state-of-the-art technologies for containerization and orchestration, our aim is to present a solution to many of these problems by migrating to a cluster-based architecture. Such a solution would not only enable us to benefit from high availability and ease of scaling LearnShell components depending on our day-to-day needs, but also potentially give us a platform for effective CI/CD processes. During the course of implementing our cluster, we shall try and explore all of these avenues and find ways to benefit from them.
 
 
 \setsecnumdepth{all}
@@ -94,6 +103,8 @@ As a side note, even though the current architecture of LearnShell leans towards
 
 \section{Architecture}
 
+In this section, we shall explore the LearnShell architecture, its components and technologies used, all of which except for the evaluator are currently containerized and as such are prime candidates for a migration into a cluster-based architecture, which we shall cover later.
+
 \subsection{Proxy server}
 
 For the purpose of receiving incoming traffic and redirecting it, a container is used as a proxy server, which redirects requests received from the client, and points them toward containers for further processing, and sending back responses to the client received from these same containers as if it was by itself their origin, therefore fulfilling the role of a reverse proxy. \cite{proxies} A subdomain of the fit.cvut.cz domain is assigned to the ip address of this proxy server.
@@ -110,7 +121,7 @@ It is built entirely with Next.js, a modern JavaScript framework based on React,
 
 The code in this container represents the data access layer of the application. Among its functionalities is writing and reading data to the database (such as users and assignments) and communicating with the generator and evaluator services for the purpose of creating randomized data for validation of Bash scripts and evaluating the outputs of these scripts by comparing them with the generated data. \cite{learnshell-borsky} The back end also communicates with KOS, our student information system, and an integration with the system for grades and evaluations, Grades, is planned for the future.
 
-The entire back end is built in Django, a MVP (stands for model view presenter) web framework written in Python. In addition, the container contains several Bash scripts to ensure, between other things, connection and migration of data to the database, as well as configuration files for the web server.
+The entire back end is built in Django, a web framework written in Python adhering to the model-view-presenter architectural pattern. In addition, the container contains several Bash scripts to ensure, between other things, connection and migration of data to the database, as well as configuration files for the web server.
 
 \subsection{Distributed task queue}
 
@@ -132,7 +143,52 @@ Solely for this reason, the LearnShell Input-Describing Language (LI-DL for shor
 
 The evaluator, as befits its name, fulfills the role of a service that assesses each submission made by the user. It does so by creating a chroot jail, which is essentially a simulated root environment running on a directory; this way, the directory in question is isolated from the rest of the computer, protecting the computer from potential destructive effects of certain commands, such as the famous fork bomb. \cite{unix-handbook} It checks for criteria such as whether the user created or deleted the correct files, whether the files created have the correct permissions, or the outputs (and the streams through which they are passed) of the scripts submitted.
 
-Currently, the evaluator runs on its own server, and therefore is the only service which is not packaged inside of a container.
+Currently, the evaluator runs on its own server, and therefore is the only service which is not packaged inside of a container. Note that this is why the evaluator will \textbf{not} be a part of our cluster (both Docker Swarm and Kubernetes require applications to be running in containers); instead, the cluster should, for now, connect to the server on which the evaluator is running. Once the evaluator is containerized, there is no reason not to include it within our cluster.
+
+\section{Potential improvements}
+
+Lastly, let us pick up on what was started in the introduction of our thesis, and expand on current inefficencies and potential improvements to the LearnShell portal. Incidentally, all of these inefficencies can be handled either completely or in part by utilizing a cluster-based architecture for our application. Be advised that we use several terms here which are not yet formally defined in our thesis, such as Docker or CI/CD; to see their definitions and use cases, consult the following chapters. This section merely serves as an introduction into the problems we are attempting to solve, as well as potential additions to LearnShell as it is right now.
+
+\subsection{High availability}
+
+An extremely important aspect of modern software is availability, which denotes the period of time when a service is available and is often expressed as a percentage indicating how much time the application spends in a working state. \cite{what-is-high-availability} By extension, a highly available application is simply an application that spends as much time as possible up and running, with the downtime being so negligible that it will not be noticed by users at all.
+
+Orchestration technologies were built exactly with high availability in mind; by running several replicas of components of LearnShell, all our components are made redundant, meaning that if one component of LearnShell fails, its replica rises immediately to fulfill the same role. Thus, we eliminate any single points of failure, and the system can be kept up and running even under extreme loads.
+
+\subsection{Load balancing}
+
+To follow up on the previous subsection, load balancing should be mentioned as another powerful feature of architectures that run several replicas of its components. By creating and configuring the network of our cluster, we can make our cluster manage the incoming traffic, that is web requests of all kinds, in a resourceful way. For example, in case of an unusually high amount of requests, load balancing algorithms would redirect these requests to those workloads within the cluster that are least burdened at the moment, balancing the amount of requests and ensuring that there are minimal bottlenecks.
+
+It should be noted that by itself, the nginx server used by LearnShell has load balancing capabilities. However our architecture falls short by not utilizing multiple replicas for critical parts of the application, and as such there can be no real distribution of the requests being received by LearnShell at the moment.
+
+\subsection{CI/CD}
+
+An implementation of a CI/CD pipeline has no real disadvantages and many potential advantages and future opportunities. We will be discussing the exact definition and our implementation at length in some of the following chapters of this thesis. To provide a short summary, a CI/CD process would facilitate the automation of some repetitive tasks by making our Gitlab server do these tasks on each push or merge of a new Git commit.
+
+Here are some of these tasks (which can be applied directly to LearnShell):
+
+\begin{itemize}
+  \setlength\itemsep{0em}
+  \item Build Docker images and push them into our private registry.
+  \item Run unit tests and block the execution of some tasks if they do not pass.
+  \item Enable automatic code formatting of newly pushed code.
+  \item Deploying latest verions of our applications into production.
+  \item Explore implementation of continous integration and continuous deployment in LearnShell, specifically the newly created cluster.
+\end{itemize}
+
+\subsection{Staging environment}
+
+Since we are working on providing a solution to issues regarding load balancing and overall performance of LearnShell, it would be very beneficial for us to make use of an environment that is almost exactly identical our production environment; in practice known as a staging environment. \cite{staging-server} This would have several advantages; by having a mirror of our production environment, we could for example configure our CI/CD process to first deploy the new code to the staging environment, and double-check this new version of LearnShell for any unnoticed bugs before finally deploying the code to our production environment as well. 
+
+However, where a staging environment really shines is the potential for running complex tests focused on performance. For example, to test the system's balancing capabilities, we could simulate large amount of requests of all kinds and review the abilities of our staging environment to handle the pressure. This process often referred to as load testing. For example, one could simulate hundreds of submissions sent to our evaluator, and watch in real time how fast the cluster evaluates these submissions.
+
+To sum it up, a staging environment would provide for a great "testing ground" of how ready the new version of our application really is for practical use. In addition, with a working CI/CD process already set up, it could be expanded by adding an option to deploy the new code to the production environment by simply approving it manually when we are sure it is ready.
+
+\subsection{Logging and monitoring infrastructure}
+
+As another way of troubleshooting bugs within an application, a logging and monitoring infrastructure can be invaluable. By tracking and storing data regarding even the most basic of things, such as submissions made by users, we gain information that can prove to be of great help in the long run, be it for debugging of errors in our application or arriving at informed conclusions regarding the scalability of our application.
+
+In addition, if using a batteries included orchestration platform such as Kubernetes, a logging infrastructure can be set up with relative ease by installing pre-built packages such as the ELK Helm chart (more on Kubernetes and Helm in the next chapters).
 
 
 \chapter{Containerization and Orchestration}
@@ -145,8 +201,8 @@ In this chapter, we shall finally explain in detail the terms containerization a
 
 \begin{figure}[H]
 \centering
-\caption{VM-based virtualization with VMware}
-\hspace*{-0cm}
+\caption{VM-based virtualization with VMware \cite{what-container}}
+\hspace*{-0.4cm}
 \includegraphics[scale=0.75]{virtualization}
 \end{figure}
 
@@ -165,8 +221,8 @@ With the advent of Docker, container-based virtualization (henceforth referred t
 
 \begin{figure}[H]
 \centering
-\caption{Container-based virtualization with Docker}
-\hspace*{-0cm}
+\caption{Container-based virtualization with Docker \cite{what-container}}
+\hspace*{-0.65cm}
 \includegraphics[scale=0.75]{containerization}
 \end{figure}
 
@@ -241,7 +297,7 @@ The very first version of Kubernetes was released to the public on July 21, 2015
 
 \begin{figure}[H]
 \centering
-\caption{Architecture of a Kubernetes cluster}
+\caption{Architecture of a Kubernetes cluster \cite{kube-components}}
 \hspace*{-2cm}
 \includegraphics[scale=0.5]{kube-architecture}
 \end{figure}
@@ -278,9 +334,9 @@ Let us begin by describing the workloads:
   \setlength\itemsep{0em}
   \item \textbf{Pod} is the smallest deployable resource in Kubernetes. It can be regarded as a wrapper around one or more containers, in which they may share storage and network resources.
   \item \textbf{ReplicaSet} is a controller that ensures that there is a stable set of replica pods running at a given time, ensuring high availability and fault tolerance. It creates or deletes pods dynamically to ensure the correct amount of pods is running at any given time.
-  \item \textbf{Deployment} in turn serves to provide updates on both ReplicaSets and Pods. In practice, it is recommended to use a deployment, as it enables the administrator to control everything regarding these resources from one place, from commands to be executed on newly created containers to the amount of replica pods. We shall provide more information on deployments in the implementation chapter, as we use them for our LearnShell applications.
-  \item \textbf{StatefulSet} is very similar to a deployment, except that it is used specifically for stateful applications, such as databases, by making use of PersistentVolumes or PersistentVolumeClaims as storage units.
-  \item \textbf{DaemonSet} is yet another workload that can be mistaken for a deployment, however it is different in that it ensures that all nodes run a copy of the pod being managed by it. It has many applications, such as running node monitoring or log collecting applications.
+  \item \textbf{Deployment} in turn serves to provide updates on both ReplicaSets and Pods. In practice, it is recommended to use a Deployment, as it enables the administrator to control everything regarding these resources from one place, from commands to be executed on newly created containers to the amount of replica pods. We shall provide more information on Deployments in the implementation chapter, as we use them for our LearnShell applications.
+  \item \textbf{StatefulSet} is very similar to a Deployment, except that it is used specifically for stateful applications, such as databases, by making use of PersistentVolumes or PersistentVolumeClaims as storage units.
+  \item \textbf{DaemonSet} is yet another workload that can be mistaken for a Deployment, however it is different in that it ensures that all nodes run a copy of the pod being managed by it. It has many applications, such as running node monitoring or log collecting applications.
   \item \textbf{Job} creates a pod and gives it commands to execute until a certain number successfully terminate.
   \item \textbf{CronJob} creates a pod and gives it commands to execute periodically on a set datetime, written in the Cron format.
 \end{itemize}
@@ -290,20 +346,20 @@ Now that we have described the workloads, let us continue by listing other resou
 \begin{itemize}
   \setlength\itemsep{0em}
   \item \textbf{Service} provides a way to expose our pods as a network service. The pod can be exposed using a ClusterIP to be accessible only by other applications within the cluster, or either a NodePort or LoadBalancer in order to be accessible from outside as well. Configuring services on our pods is essential in order to assure that network communication within our cluster is not compromised by actions such as redeployments or simply deleting pod and creating new ones.
-  \item \textbf{Ingress} is a rather complex resource that manages external access to services within a cluster. For example, if we want to have a single IP address (and by extension, registered domain) which would access different pods based on the specified path, we would use ingress to route traffic and provide load balancing for our cluster network by redirecting requests to pod replicas based on routing algorithms.
-  \item \textbf{PersistentVolume} and \textbf{PersistentVolumeClaim} are resources that provision a set amount of storage space to be used by certain pods which are connected to them. This storage space is independent of the space on these pods, which means that if a pod shuts down, it does not lead to data being deleted, as it is saved outside of it. In simple terms, the difference between the two resources lies in that while a PersistentVolume allocates the storage space for use immediately upon its creation, a PersistentVolumeClaim acts as a request for storage, which is executed only when it is needed by looking at our PersistentVolumes and choosing one appropriate for our data. 
+  \item \textbf{Ingress} is a rather complex resource that manages external access to services within a cluster. For example, if we want to have a single IP address (and by extension, registered domain) which would access different pods based on the specified path, we would use Ingress to route traffic and provide load balancing for our cluster network by redirecting requests to pod replicas based on routing algorithms.
+  \item \textbf{PersistentVolume} and \textbf{PersistentVolumeClaim} are resources that provision a set amount of storage space to be used by certain Pods which are connected to them. This storage space is independent of the space on these pods, which means that if a pod shuts down, it does not lead to data being deleted, as it is saved outside of it. In simple terms, the difference between the two resources lies in that while a PersistentVolume allocates the storage space for use immediately upon its creation, a PersistentVolumeClaim acts as a request for storage, which is executed only when it is needed by looking at our PersistentVolumes and choosing one appropriate for our data. 
   \item \textbf{ConfigMap} and \textbf{Secret} can be regarded simply as collections of key-value pairs to be used by our pods namely as environmental variables. They differ only in that Secrets store encrypted sensitive information, while ConfigMaps do not.
 \end{itemize}
 
-While not technically being a resource, \textbf{Namespaces} are vital part of the Kubernetes ecosystem, and as such should be mentioned. In short, namespaces fulfill the function of separating virtual clusters backed by the same physical cluster. This means that we can run multiple different clusters on the cloud or on-premises, and use namespaces to isolate them from one another. This is helpful especially in large organizations, but best practices dictate that each cluster should have its own separate namespace. In our project, this would be the "learnshell" namespace, and we shall make it so.
+While not technically being a resource, \textbf{Namespaces} are vital part of the Kubernetes ecosystem, and as such should be mentioned. In short, Namespaces fulfill the function of separating virtual clusters backed by the same physical cluster. This means that we can run multiple different clusters on the cloud or on-premises, and use namespaces to isolate them from one another. This is helpful especially in large organizations, but best practices dictate that each cluster should have its own separate namespace. In our project, this would be the "learnshell" Namespace, and we shall make it so.
 
 \subsection{Authentication and authorization}
 
 While this topic is particularly complex, a brief overview will be provided as authentication and authorization are important parts of any cluster, including ours.
 
-In Kubernetes, there are two categories of users: normal users, and ServiceAccounts created and managed by the cluster. While there are numerous ways for users to authenticate and be able to make API calls to the api-server, we shall focus on service accounts here, as they are of particular importance in our implementation of a CI/CD process. A \textbf{ServiceAccount} is a special type of account that can be used by pods to contact the api-server just like a normal user would. This can be useful in many cases, such as when we want to restart a deployment on cue, for example as part of our CI/CD pipeline. Each ServiceAccount in our cluster has a unique bearer token with which it can authenticate to the api-server to execute commands via API calls.
+In Kubernetes, there are two categories of users: normal users, and ServiceAccounts created and managed by the cluster. While there are numerous ways for users to authenticate and be able to make API calls to the api-server, we shall focus on service accounts here, as they are of particular importance in our implementation of a CI/CD process. A \textbf{ServiceAccount} is a special type of account that can be used by Pods to contact the api-server just like a normal user would. This can be useful in many cases, such as when we want to restart a Deployment on cue, for example as part of our CI/CD pipeline. Each ServiceAccount in our cluster has a unique bearer token with which it can authenticate to the api-server to execute commands via API calls.
 
-However, before actually execute these commands in practice, the api-server first checks if the ServiceAccount in question has sufficient authority to perform them. For this, \textbf{Roles} and \textbf{RoleBindings} are used. The administrator can create a role with a specific authority, for example restarting deployments, and bind this role via a RoleBinding to the ServiceAccount of a specific pod. Once that is finished, the pod can perform API calls to the api-server of the cluster, and the api-server will execute these calls after confirming that the ServiceAccount is correctly authorized.
+However, before actually execute these commands in practice, the api-server first checks if the ServiceAccount in question has sufficient authority to perform them. For this, \textbf{Roles} and \textbf{RoleBindings} are used. The administrator can create a role with a specific authority, for example restarting Deployments, and bind this role via a RoleBinding to the ServiceAccount of a specific pod. Once that is finished, the pod can perform API calls to the api-server of the cluster, and the api-server will execute these calls after confirming that the ServiceAccount is correctly authorized.
 
 
 \chapter{LearnShell Cluster Analysis}
@@ -316,9 +372,9 @@ Since we will be implementing a cluster for LearnShell, one of the most importan
 
 \subsection{General comparison}
 
-As we have already discussed, the main practical difference between Docker Swarm and Kubernetes historically lied in their complexity. Docker Swarm is much more tied to Docker itself than Kubernetes, which supports several container runtimes. In fact, as of 2021, the default container runtime of the newest Kubernetes version is containerd. \cite{kube-containerd} In fact, swarm mode is natively included in Docker, so there's no need to install additional packages. As for Kubernetes, things aren't so simple, as we will elaborate later. 
+As we have already discussed, the main practical difference between Docker Swarm and Kubernetes historically lied in their complexity. Docker Swarm is much more tied to Docker itself than Kubernetes, which supports several container runtimes. In fact, as of 2021, the default container runtime of the latest Kubernetes version is containerd. \cite{kube-containerd} In fact, swarm mode is natively included in Docker, so there's no need to install additional packages. As for Kubernetes, things aren't so simple, as we will elaborate later. 
 
-Additionally, the learning curve is much steeper with Kubernetes, however, Kubernetes has a much, much more rich ecosystem, and as such there are many problems that can be easier to solve with Kubernetes than with Docker Swarm. Regardless of the learning curve of each platform, it has to be said that the documentation of both platforms is impeccably written, even though the author of this thesis finds that Kubernetes has an edge in this regard. One strength in particular is the option of running a test cluster via in-browser terminal, connecting to the cloud via SecureShell. This enables the user to immediately apply in practice what he has learned through reading the documentation. Therefore, it could be said in summary that while Docker Swarm is easier to grasp initially, both platforms have great documentation that explains the concepts quite capably, with Kubernetes being slightly better.
+Additionally, the learning curve is much steeper with Kubernetes, however, Kubernetes has a much, much more rich ecosystem, and as such there are many problems that can be easier to solve with Kubernetes than with Docker Swarm. Regardless of the learning curve of each platform, it has to be said that the documentation of both platforms is impeccably written, even though the author of this thesis finds that Kubernetes has an edge in this regard. One strength in particular is the option of running a test cluster via in-browser terminal, connecting to the cloud via SecureShell. This enables the user to immediately apply in practice what was learned through reading the documentation. Therefore, it could be said in summary that while Docker Swarm is easier to grasp initially, both platforms have great documentation that explains the concepts quite capably, with Kubernetes being slightly better.
 
 One area where Kubernetes has a clear, unassailable advantage is industry adoption. As proof, taking a look at the respective Github repositories of each platform should suffice (this is possible due to both platforms being open source from the very start, and as such all the code is publicly available). By glancing at the pull requests of each repository (in layman's terms, a pull request is a request for review of code before it is merged into a branch of a repository, and therefore integrated into the codebase), one can see that there is a world of difference; currently, the amount of pull requests for Kubernetes is ten times more than the amount for Docker Swarm. \cite{swarm-pull, kube-pull} Another important factor is that Kubernetes was initially developed, and is being maintained largely by Google; an industry behemoth. This means that there is a near-infinite reserve of resources dedicated to keeping Kubernetes alive and well.
 
@@ -336,7 +392,7 @@ When it comes to quickly setting up a cluster, Docker Swarm wins; its natural in
 
 In the case of LearnShell, we define maintainability by the difficulty of keeping the cluster up and running, as well as updating the containers and adding new ones without disrupting it. Another important factor is how difficult it would be for new members of the LearnShell team to get up to speed with the cluster. In this case, the sheer size of the Kubernetes ecosystem plays a very important role, since any potential new developers have a plethora of articles, video, books or documentation on the internet at their disposal, while Docker Swarm is dwindling in its presence. Therefore, one can assume that if the cluster were to be improved upon in the future, it would be far easier to do so with Kubernetes, since it is certain to be a dominant player in the orchestration world for some time.
 
-Versatility is admittedly a rather broad term to apply here, but in this case, we are addressing questions such as how difficult it would be for us to change up the proxy server on which LearnShell is running, or the database used by LearnShell, or (most importantly!) how easy or hard it would be to migrate the cluster from an on-premises architecture to the cloud. Whereas the services used by the cluster are quite easy to change up in both platforms, since Docker Swarm with its natural integration of Docker containers allows us to simply pull a different image if we wanted to use a different database engine, for example, and Helm makes this trivial with Kubernetes as well, it is the cloud where Kubernetes really shines here. Since there are comprehensive offerings on the cloud for Kubernetes, such as GKE on Google Cloud, it is entirely within the realms of possibility to migrate the entire cluster to the cloud. This could potentially not only lead to less upkeep, but to a much smoother experience of maintaining the cluster, especially now that GKE Autopilot was introduced, which promises greater optimization of resource use by the cluster, leading to greater performance in addition to lower costs of upkeep. \cite{autopilot}
+Versatility is admittedly a rather broad term to apply here, but in this case, we are addressing questions such as how difficult it would be for us to change up the proxy server on which LearnShell is running, or the database used by LearnShell, or (most importantly) how easy or hard it would be to migrate the cluster from an on-premises architecture to the cloud. Whereas the services used by the cluster are quite easy to change up in both platforms, since Docker Swarm with its natural integration of Docker containers allows us to simply pull a different image if we wanted to use a different database engine, for example, and Helm makes this trivial with Kubernetes as well, it is the cloud where Kubernetes really shines here. Since there are comprehensive offerings on the cloud for Kubernetes, such as GKE on Google Cloud, it is entirely within the realms of possibility to migrate the entire cluster to the cloud. This could potentially not only lead to less upkeep, but to a much smoother experience of maintaining the cluster, especially now that GKE Autopilot was introduced, which promises greater optimization of resource use by the cluster, leading to greater performance in addition to lower costs of upkeep. \cite{autopilot}
 
 The last criterion would be the integration with other services, which essentially points to future possibilities of running a continuous integration routine on Gitlab (where LearnShell repositories are hosted), in which it would be possible to automatically replace older versions of containers with new ones, or possibly keeping different clusters for different purposes, such as a staging cluster for testing purposes, and a production cluster, which the students and teachers would be using. In this, Kubernetes is a clear winner, as Gitlab is making a great effort in being containerization and orchestration friendly by allowing even free-tier users to integrate a cluster with their projects. \cite{gitlab-kube} Also, it coincidentally allows us to keep a private container registry for free, and creating CI routines with Gitlab Runners. However, unfortunately, for the purposes of LearnShell, there are only so many features that we can use at this moment in time, since the current release of Gitlab (11.8.10.) used by the university is more than two years old, and we are using the Community edition, which doesn't have some features that could prove very useful. Among these features is the Kubernetes Agent or Auto Devops, a platform that advertises reduced complexity in setting up pipelines, and probably most importantly in our case, the option to integrate multiple clusters into Gitlab, which would give us the option to have different pipelines, for example one for testing purposes, and one for the production cluster. Nevertheless, the option to use a private Gitlab registry remains available, as well as the option to use Gitlab Runners on our cluster to run CI pipelines; we shall elaborate on this later.
 
@@ -371,13 +427,13 @@ During the process of writing code, software developers may often encounter prob
 In the Kubernetes world, a package manager of sorts exists as well; its name is Helm, and it manages packages called \textbf{Helm charts}, which are simply bundles of configuration and definition files to create Kubernetes workloads and resources. By taking a closer look at the Docker containers currently employed in LearnShell, we quickly notice that the PostgreSQL and Redis containers have no additional configuration, aside from environment variables and port mapping. In addition, as we have outlined in the Kubernetes section of the previous chapter, databases can be a bit more verbose to set up, as they represent a stateful component of an application; therefore, after a database pod is killed and revived, there should be a persistent layer on which the data remains. Also, if we run multiple database pods, all of these pods should always be connected to the same persistent volume. In practice, we would need to setup a StatefulSet, a PersistentVolume or a PersistentVolumeClaim and expose the database on a headless Service, which is a considerable amount of manual setting up.
 In summary, using Helm is very appropriate in situations where we know that we may be reinventing the wheel by writing multiple configuration files and commands. Additionally, by using Helm charts that abide by the current best practices of cluster configuration, we avoid the potential headache of improper configuration, or one which does not adhere to the best practices; however, we should still be careful on which Helm charts to trust.
 
-To make use of Helm charts, one first has to add a repository from which to pull these charts. Afterwards, by using the install command, helm checks the currently added repositories for the chart, and installs the chart if it is found, giving it the chosen name. An instance of a chart running on Kubernetes is referred to as a "release"; by signifying a name in the install command, all the workloads and resources in the cluster that are part of the release will be called as such. Importantly, a YAML file, usually called values.yaml (in our case, we shall prefix it by the name of the release) can be referred to from which variables can be pulled to customize the configuration of the release, such as login credentials, disk space allocated by the persistent volumes, or static IP addresses from which to access the cluster from the internet in the case of charts focused on networking. This file is called a Values file in the Helm nomenclature.
+To make use of Helm charts, one first has to add a repository from which to pull these charts. Afterwards, by using the install command, helm checks the currently added repositories for the chart, and installs the chart if it is found, giving it the chosen name. An instance of a chart running on Kubernetes is referred to as a "release"; by signifying a name in the install command, all the workloads and resources in the cluster that are part of the release will be called as such. Importantly, a YAML file, usually called values.yaml (in our case, we shall prefix it by the name of the release) can be referred to from which variables can be pulled to customize the configuration of the release, such as login credentials, disk space allocated by the persistent volumes, or static IP addresses from which to access the cluster from the internet in the case of charts focused on networking. This file is called a Values file in the Helm nomenclature. \cite{using-helm}
 
 In addition, there are several other tricky aspects than just stateful application which can be handled by using Helm. For example, as we will demonstrate, charts can be used to simplify network configuration, and to set up CI/CD with internal access to the cluster, which can prove extremely useful for our particular use case.
 
 \section{Private container registry}
 
-In order for our cluster to run deployments, we need to provide Kubernetes with the necessary Docker images from which to create containers contained within the pods maintained by these deployments. For that, there is a requirement for a container registry, wherein these images will be located. Also, for security reasons, this registry should be private; since LearnShell is currently only used by the Czech Technical University, its code should not be accessible from the outside, and therefore outsiders should not be able to pull LearnShell images without any authorization. From our research of possible private container registry offerings, we have arrived at a crossroads between three alternatives:
+In order for our cluster to run Deployments, we need to provide Kubernetes with the necessary Docker images from which to create containers contained within the Pods maintained by these Deployments. For that, there is a requirement for a container registry, wherein these images will be located. Also, for security reasons, this registry should be private; since LearnShell is currently only used by the Czech Technical University, its code should not be accessible from the outside, and therefore outsiders should not be able to pull LearnShell images without any authorization. From our research of possible private container registry offerings, we have arrived at a crossroads between three alternatives:
 
 \begin{itemize}
   \setlength\itemsep{0em}
@@ -386,8 +442,7 @@ In order for our cluster to run deployments, we need to provide Kubernetes with 
   \item Gitlab Container Registry
 \end{itemize}
 
-Since we have deployed a cluster on Google Cloud, a natural option would be to also host our images there; it would enable for easy and robust integration with our GKE-hosted Kubernetes cluster. However, there is a monthly 
-fee of 0.0026 dollars per GB per month, and we would like to avoid any monthly payments as much as possible. Therefore, we shall narrow our scope to free offerings. Out of those, we have only found two possibilities that are both free of charge as well as private. We could use a self-hosted registry, which is definitely possible. However, there are two disadvantages; since it is self-hosted, we would have to set it up, as well as maintain it manually, which could lead to trouble down the road, as we are trying to maximize automatization, and therefore avoid the need for manual maintenance. Secondly, such a solution would be harder to integrate with Gitlab and its CI/CD offering; it would still be possible, but additional configuration would be necessary, increasing complexity. There is only one option that is both free, private and enables integration with Gitlab, and that is hosting the image registry on Gitlab itself, using the Gitlab Container Registry. This is also the best provider-independent option, as a DevOps pipeline on Gitlab would be easiest to improve upon by hosting the images there, as well.
+Since we have deployed a cluster on Google Cloud, a natural option would be to also host our images there; it would enable for easy and robust integration with our GKE-hosted Kubernetes cluster. However, there is a monthly fee of 0.026 dollars per GB per month, and we would like to avoid any monthly payments as much as possible. \cite{gcr-pricing} Therefore, we shall narrow our scope to free offerings. Out of those, we have only found two possibilities that are both free of charge as well as private. We could use a self-hosted registry, which is definitely possible. However, there are two disadvantages; since it is self-hosted, we would have to set it up, as well as maintain it manually, which could lead to trouble down the road, as we are trying to maximize automation, and therefore avoid the need for manual maintenance. Secondly, such a solution would be harder to integrate with Gitlab and its CI/CD offering; it would still be possible, but additional configuration would be necessary, increasing complexity. There is only one option that is both free, private and enables integration with Gitlab, and that is hosting the image registry on Gitlab itself, using the Gitlab Container Registry. This is also the best provider-independent option, as a DevOps pipeline on Gitlab would be easiest to improve upon by hosting the images there, as well.
 
 As such, we arrive at the conclusion that Gitlab would be the ideal option for a private container registry, especially when taking proper CI/CD routines into consideration.
 
@@ -395,7 +450,7 @@ As such, we arrive at the conclusion that Gitlab would be the ideal option for a
 
 \begin{figure}[H]
 \centering
-\caption{Visualization of typical CI/CD pipelines}
+\caption{Visualization of typical CI/CD pipelines \cite{cicd-diagram}}
 \hspace*{-2cm}
 \includegraphics[scale=0.3]{cicd}
 \end{figure}
@@ -415,9 +470,9 @@ In order to properly analyze the technologies which we shall be making use of to
 
 \begin{figure}[H]
 \centering
-\caption{CI/CD pipeline}
-\hspace*{-1cm}
-\includegraphics[scale=0.5]{learnshell-cicd}
+\caption{LearnShell CI/CD pipeline}
+\hspace*{-3.6cm}
+\includegraphics[scale=0.7]{learnshell-cicd}
 \end{figure}
 
 In this diagram, the uppermost large rectangles represent the parties performing certain taks and the smaller rectangles below them represent their assigned tasks, performed sequentially. To sum it up, we would like to do the following on each push to the master branch of a LearnShell Gitlab repository:
@@ -430,13 +485,13 @@ In this diagram, the uppermost large rectangles represent the parties performing
   \item Redeploy Deployment inside our Kubernetes cluster containing the Pod which pulls the freshly pushed image.
 \end{enumerate}
 
-To build a pipeline running these tasks, we shall be using Gitlab CI/CD. To achieve this, we shall be writing a .gitlab-ci.yml file, which will be parsed to create a pipeline on every new commit into the repository. And to run the tasks (or to adhere to the Gitlab CI terminology, jobs), we shall make use of Gitlab Runner, which is an application that serves as a platform for running jobs specified in that Gitlab pipeline. We shall go into a lot more detail regarding the implementation of our pipelines in the next chapter.
+To build a pipeline running these tasks, we shall be using Gitlab CI/CD. To achieve this, we shall be writing a .gitlab-ci.yml file, which will be parsed to create a pipeline on every new commit into the repository. And to run the tasks (or to adhere to the Gitlab CI terminology, jobs), we shall make use of Gitlab Runner, which is an application that serves as a platform for running jobs specified in that Gitlab pipeline. More details regarding the implementation of our pipelines will be provided in the next chapter.
 
 
 
 \chapter{LearnShell Cluster Implementation}
 
-In this final chapter of our thesis, we shall focus completely on the practical side, which is the implementation of our cluster in practice. We shall provide an overview of our code, our directory structure as well as diagrams showing the cluster in its entirety. Also, we shall focus on some key decisions made during the process, potential alternatives, goals achieved, and finally, areas of improvement. However, be advised that we will not be going deep into theory, since that was already elaborated upon in the previous chapters.
+In this final chapter of our thesis, we shall focus completely on the practical side, which is the implementation of our cluster in practice. An overview of our code and our directory structure is to be provided, as well as diagrams showing the cluster in its entirety. However, be advised that we will not be going deep into theory, since that was already elaborated upon in the previous chapters.
 
 Importantly, the cluster which we shall be focusing on in this chapter is the one running on Google Cloud, however, there is no difference between the on-premises cluster implementation and the cloud one; this is merely the personal preference of the author, as the user interface of Google Cloud proves to be really helpful for debugging. Lastly, one may notice that our cluster implementation does not contain the LearnShell evaluator. This is because the evaluator has not yet been containerized to issues outlined in the first chapter. Once a containerized evaluator is implemented, it is not at all difficult to include it in our cluster. As of now however, the cluster can work with the evaluator server, however some additional configuration may or may not be needed.
 
@@ -446,18 +501,18 @@ To start off, let us briefly summarize the main technologies we have made use of
 
 \begin{itemize}
   \setlength\itemsep{0em}
-  \item \textbf{Kubernetes} as our orchestration platform
-  \item \textbf{Docker} as our containerization platform
-  \item \textbf{Gitlab Container Registry} as our private container registry
-  \item \textbf{Helm} as our package manager
-  \item \textbf{Google Cloud} as our cloud platform, and by extension \textbf{GKE} as our Kubernetes engine
-  \item \textbf{Minikube} as our local development single-node cluster platform
-  \item \textbf{Gitlab CI/CD} and \textbf{Gitlab Runners} to facilitate CI \& CD for LearnShell repositories
+  \item \textbf{Kubernetes} as our orchestration platform.
+  \item \textbf{Docker} as our containerization platform.
+  \item \textbf{Gitlab Container Registry} as our private container registry.
+  \item \textbf{Helm} as our package manager.
+  \item \textbf{Google Cloud} as our cloud platform, and by extension \textbf{GKE} as our Kubernetes engine.
+  \item \textbf{Minikube} as our local development single-node cluster platform.
+  \item \textbf{Gitlab CI/CD} and \textbf{Gitlab Runners} to facilitate CI/CD for LearnShell components.
 \end{itemize}
 
 As a side note, we have used Linux as our operating system of choice both locally and on the cloud, due to its seamless integration with Docker. On Google Cloud, we have deployed three VMs running Debian, as it is the distribution we are most familiar with. These VMs were provisioned automatically by GKE in order to function as nodes for our cluster. As for the on-premises, implementation, we are currently running it on Minikube; however, a Minikube cluster is not quite fit for production, since it is only a single-node cluster tailor-made for local development. On the other hand, hosting a cluster on the cloud makes it far more viable for production right off the bat, as we have the option of adding and removing nodes as we see fit (alongside lots of other features), and as such we can create a cluster optimized for high-availability, allowing for drastic performance improvements by utilizing resources of multiple machines (or nodes, in the Kubernetes nomenclature) as well as protecting us from disasters such as node crashes by having other nodes step in before the crashed node recovers. \cite{high-availability}
-\newline
-Less importantly, we have used Vim as our text editor due to its ease of use when editing configuration files and availability on machines on the cloud. Also, we have used Bash in our build script for its prevalence in the Linux world, which is reflected in the fact that it is the default shell on Debian-based distributions, which we are using both for local development and on the cloud.
+
+Less importantly, we have used Vim as our text editor due to its ease of use when editing configuration files and availability on machines on the cloud. Also, we have used Bash in our build script for its prevalence in the Linux world.
 
 
 \section{Project structure}
@@ -472,31 +527,108 @@ Let us continue with a brief overview of the project structure of the repository
 
 As we can see from the output of running \verb|tree| in the project root, the files in our repository are almost exclusively either YAML configuration files or shell scripts, which is par for the course in a Kubernetes application; the YAML files contain instructions based on which we build all resources in our cluster, while the shell script uses them to build our cluster from scratch.
 
-\begin{figure}[H]
-\caption{Line count of the LearnShell Cluster project}
-\includegraphics[scale=0.5]{line-count}
-\end{figure}
+% \begin{figure}[H]
+% \caption{Line count of the LearnShell Cluster project}
+% \includegraphics[scale=0.5]{line-count}
+% \end{figure}
 
-By running \verb|wc -l| on all the (not auto-generated) files in the repository, we arrive at an estimation of a little less than 346 lines of code (due to empty lines), with the bulk of it being in the deployment configurations and the shell scripts.
-There are several facts worth mentioning regarding our project structure. Firstly, as one can see from the first figure, there are no files specifying different configurations for specific cloud providers (or for on-premises clusters). This is because with some additional work and research regarding matters such as backwards-compatible versions of Ingress, Kubernetes allows us to create truly provider-independent cluster configurations; therefore, as of right now, we can build our cluster using the build script on both Google Cloud as well as on-premises, and there is no particular reason to doubt that it would be the same for other cloud providers, such as AWS or Microsoft Azure. Secondly, the project might seem deceptively small, especially when one considers the amount of lines written. We achieved this by making use of two tools; Helm charts to forego having to write configuration files for our databases as well as using shell commands (such as \verb|kubectl expose deployment| to create services) instead of specifying our workloads and resources in YAML files. Should we instead decide to build Roles, ServiceAccounts, PersistentVolumeClaims, StatefulSets, etc. via \verb|kubectl apply| on configuration files, our project would quickly increase in size, if we go by amount of lines of code. This would not be advantageous, not even for configuration debugging purposes, since kubectl has commands specifically for describing workload and resource specifications and reading logs of workloads.
+By running \verb|wc -l| on all the (not auto-generated) files in the repository, we arrive at an estimation of a little less than 350 lines of code, with the bulk of it being in the Deployment configurations and the shell scripts.
+
+There are several facts worth mentioning regarding our project structure. Firstly, as one can see from the first figure, there are no files specifying different configurations for specific cloud providers (or for on-premises clusters). This is because with some additional work and research regarding matters such as backwards-compatible versions of Ingress, Kubernetes allows us to create truly provider-independent cluster configurations; therefore, as of right now, we can build our cluster using the build script on both Google Cloud as well as on-premises, and there is no particular reason to doubt that it would be the same for other cloud providers, such as AWS or Microsoft Azure. Secondly, the project might seem deceptively small, especially when one considers the amount of lines written. We achieved this by making use of two tools; Helm charts to forego having to write configuration files for our databases as well as using shell commands (such as \verb|kubectl expose deployment| to create services) instead of specifying our workloads and resources in YAML files. 
+
+Should we instead decide to build Roles, ServiceAccounts, PersistentVolumeClaims, StatefulSets, etc. via \verb|kubectl apply| on configuration files, our project would quickly increase in size, if we go purely by amount of lines of code. This would not be advantageous, not even for configuration debugging purposes, since kubectl has commands specifically for describing workload and resource specifications and reading logs of workloads.
 
 \section{Functionality}
 
-Before we get to any diagrams, we should properly explain what the project does. Essentially, it all boils down to our Makefile and shell scripts. By calling \verb|make|, a cluster is built from scratch in the "learnshell" namespace, in order to isolate the workloads and resources of our cluster from those potentially running on the user's machine(s) for other purposes. 
+Before we get to any diagrams, we should properly explain what the project does. Essentially, it all boils down to our Makefile and build script. By calling \verb|make|, a cluster is built from scratch in the "learnshell" namespace, in order to isolate the workloads and resources of our cluster from those potentially running on the user's machine(s) for other purposes. 
 
-However, there are some prerequisites for our build script to run correctly. Obviously, Kubernetes should be installed on the machine, as well as its prerequisite Docker. Next, Helm is required for installing Helm charts, which play a very significant role. Also, a shell interpreter is required for the build script to run, and Make should be installed to call Makefile commands. However, one can also run the build script manually; the Makefile is there merely for the convenience of the user. Finally, a platform to run the cluster on is required; the script is verified to work on Minikube and GKE, however it should work everywhere, even though we have not tested it on other providers.
+However, there are some prerequisites for our build script to run correctly. Obviously, Kubernetes should be installed on the machine, as well as its prerequisite Docker. Next, Helm is required for installing Helm charts, which play a very significant role. Also, a shell interpreter is required for the build script to run, and Make should be installed to call Makefile commands. However, one can also run the build script by itself; the Makefile is there merely for the convenience of the user. Finally, a platform to run the cluster on is required; the script is verified to work on Minikube and GKE, however it should work everywhere, even though we have not tested it on other providers.
 
 Upon running the Makefile command, setting up the cluster could take several minutes; be advised that the process is far slower on the on-premises cluster, due to it running on Minikube, which is a single-node cluster. In comparison, the Google Cloud cluster uses GKE to make sure all the pre-provisioned nodes share the load of setting it up and maintaining it, and is therefore many times faster.
 
-\section{Build script}
+\subsection{Documentation}
 
+For a exhaustive guide on how to set up the LearnShell cluster, see the Markdown documentation packaged with the project in the Gitlab repository of the cluster. The documentation includes a step-by-step guide as well as a list of current issues and potential improvements.
 
+\section{Build script in-depth}
 
-\section{Cluster architecture}
+To properly understand the process of building a cluster from the ground up, let us through the key sections of our build script. To do this, we shall analyze what is happening inside during when specific Makefile tasks are executed.
 
-In this section, we shall present the architecture
+\subsection{make help}
 
-\subsection{Deployments}
+\begin{figure}[H]
+\centering
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{build-help}
+\end{figure}
+
+By far the simplest of the three, \verb|make help| merely outputs a list of commands that can be called.
+
+\subsection{make clean}
+
+\begin{figure}[H]
+\centering
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{build-clean}
+\end{figure}
+
+Moving on, the \verb|make clean| task deletes all workloads in the "learnshell" namespace, which is the reserved namespace of our cluster. It does so by calling \verb|./build.sh clean|, which in turn calls the function described above and exits immediately. The code itself is rather self-explanatory; first we delete all workloads within the cluster, then we uninstall our Helm charts in order to be able to reinstall them completely in the future.
+
+This function serves another important role, as we have configured our build script to call it everytime an error occurs within the creation of the cluster. The advantage of this is that there are no side effects in case of any failures during the build process, and one can call the build script without worrying about polluting the namespace in case of any complications.
+
+\subsection{make}
+
+\begin{figure}[H]
+\centering
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{build-namespace}
+\end{figure}
+
+Finally, we arrive at the most important task, which is building the cluster. This is done by simply calling \verb|make| without any additional arguments, which executes our build script in full. 
+
+As a preliminary stage, the scripts pre-emptively assures that we have a clean "learnshell" namespace to work with. Afterwards, the script is configured to immediately exit in case of any errors, and just before exiting, to clean up the namespace and echo an error message.
+
+\begin{figure}[H]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[scale=0.5]{build-helm1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{build-helm2}
+\end{figure}
+
+Next, the script makes sure that we have the correct Helm repositories on hand, and installs the necessary Helm charts while updating them with our custom values. The PROJECTS variable refers to the different LearnShell projects on Gitlab, in this case web (the front end), core (the backend), generator and evaluator. Therefore, we create Gitlab runners for each project, pre-emptively even for the evaluator, as it can potentially benefit from CI/CD even without being containerized at the moment, for example to potentially run unit tests on each commit.
+
+\begin{figure}[H]
+\centering
+\hspace*{-1.5cm}
+\includegraphics[scale=0.5]{build-kube1}
+\end{figure}
+
+Here, we traverse our work directory and create Kubernetes resources where possible, while omitting Helm-related files. 
+
+\begin{figure}[H]
+\centering
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{build-kube2}
+\end{figure}
+
+After creating our resources, we expose all LearnShell Deployments. Since we are planning to make the front end as well as the back end accessible by the end user, we expose them via NodePorts, while keeping other services exposed only within the bounds of our cluster. More on this will be revealed in the Networking section.
+
+\begin{figure}[H]
+\centering
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{build-kube3}
+\end{figure}
+
+This final part of our build script is related to the CI/CD process. A SpecialAccount is generated that only has one privilege, which is updating Deployments. All our Gitlab Runners will make us of this account to facilitate continuous deployment within our cluster.
+
+\section{Deployments}
+
+After the build process is finished, we are presented with a complete cluster, including diverse Kubernetes resources such as Deployments (and by extension ReplicaSets, Pods), StatefulSets, PersistentVolumes, PersistentVolumeClaims, Services, ServiceAccounts, Secrets, ConfigMaps and more. This section in particular is dedicated to the Deployments which in our case specifically represent components unique to LearnShell.
 
 \begin{figure}[H]
 \centering
@@ -505,37 +637,129 @@ In this section, we shall present the architecture
 \includegraphics[scale=0.5]{deployment-diagram}
 \end{figure}
 
-\subsubsection{Backend}
+As we can see in this diagram, we have four LearnShell Deployments in total, named respectively web, celery, generator and backend.
 
-\subsubsection{Web}
+The general workflow of each of our Deployments is as follows:
 
-\subsubsection{Generator}
+\begin{enumerate}
+  \setlength\itemsep{0em}
+  \item \textbf{Deployment} resources are generated by using \verb|kubectl apply -f| on our YAML file containing the Deployment definition.
+  \item \textbf{ReplicaSet} resources are in turn created and maintained by our Deployments.
+  \item \textbf{Pod} resources are created, updated and deleted by our ReplicaSets, according to the data specified in our YAML file; of particular importance is information such as the amount of replica Pods that should be running at any given time, the ports on which our Pods shall communicate or the images from which our containers should be created.
+\end{enumerate}
 
-\subsection{StatefulSets}
+In addition, each of our Deployments is exposed to our cluster via its own Service to assure seamless communication between the Pods maintained by them.
 
-\subsubsection{Postgres chart}
+\subsection{Deployment configuration}
+
+To provide some insight into our Deployments, let us take a closer look at one of our YAML files in which they are specified. For this purpose, we shall be using our backend Deployment.
+
 \begin{figure}[H]
 \centering
-\caption{PostgreSQL Helm chart}
-\hspace*{1cm}
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{deploy-backend1}
+\end{figure}
+
+In each Kubernetes object definition, there are four required fields:
+
+\begin{itemize}
+  \setlength\itemsep{0em}
+  \item \textbf{apiVersion}, which defines the version of the Kubernetes API that we want to use to create our object. By specifying apps/v1, we tell the Kubernetes engine to use the latest version.
+  \item \textbf{kind} specifices the object to be created; in our case, a Deployment.
+  \item \textbf{metadata} contains data that help us uniquely identify our object. Typically, that would be a name, labels of all kinds, such as the application to which the object belongs, or the namespace. Here we use just two labels; one for the name of our resource, and the second for our application.
+  \item \textbf{spec} is the most verbose, as it entails the state which is desired for our object. As such, the spec field is very different across objects, with very different specifications between different resources. In the next snippet, we shall go into more detail regarding our spec field.
+\end{itemize}
+
+Importantly, within the spec field, the \textbf{replicas} keyword commands the ReplicaSet created by our Deployment to create (and maintain) as many replica Pods as we want. In our case, just one, as this cluster is not in production. However, a production-ready cluster would have as many replica Pods as is necessary to ensure high availability between them. Furthermore, the \textbf{selector} field serves as a way for our resources to identify each other; here, we specify that the Deployment should be matched to other resources that also have the learnshell app label, therefore grouping them together via this label.
+
+\begin{figure}[H]
+\centering
+\hspace*{-0.5cm}
+\includegraphics[scale=0.5]{deploy-backend2}
+\end{figure}
+
+In this snippet, which is a continuation of the spec field, we have written a \textbf{template} from which our Pods should be built. The template automatically understands that it should build Pods, as it is defined within a Deployment configuration, and inherits its API version as well. Therefore, there is no need to specify either the apiVersion or the kind fields. Within the metadata field, we simply assign the Pod to our learnshell application, and give it the same name as the Deployment which manages it.
+
+As for the spec field, there are two key-value pairs: 
+
+\begin{itemize}
+  \setlength\itemsep{0em}
+  \item \textbf{containers} is mapped to a list of one or more container specifications, defining the containers which should be built within the Pod.
+  \item \textbf{imagePullSecrets} is in turn mapped to a list of Secrets in our cluster which we shall be using to authenticate to our Gitlab private registry and pull Docker images from it. As the backend Pod only takes a single container, which contains the code for the backend component, we only need to include the secret to the private registry within our backend repository on Gitlab.
+\end{itemize}
+
+Furthermore, let us walk through the \textbf{containers} field, which contains a single container:
+
+\begin{itemize}
+  \setlength\itemsep{0em}
+  \item \textbf{name} is self-explanatory; it assigns a name by which we can identify our container within the Pod.
+  \item \textbf{image} tells the Pod from where to pull the container image. Here, it is the URL of our server and its open port, with the path starting at the LearnShell group, continuing with the repository within that group, and finally the name of the image.
+  \item \textbf{ports} is a list of ports that the container should be using, much like in a typical Docker container on any other machine.
+  \item \textbf{command} and \textbf{args} is simply a command and a sequence of its arguments that should be run on container start-up. In our case, we first execute a script that runs for 300 seconds until it connects to our PostgreSQL database which is running on another Pod, and on completion, starts serving our Django application.
+  \item \textbf{envFrom} is tied to our ConfigMap resources. By using \textbf{configMapRef}, we tell our container to use all the variables contained within the specified ConfigMap. However, it is also possible to handpick the variables to pull from our ConfigMap, if need be.
+\end{itemize}
+
+As for our other Deployments, their YAML configurations all follow a very similar pattern to the one we just demonstrated. Each Deployment has its own unique name, and its own unique template by which Pods are created, with different ports, start-up scripts and of course, Docker images. For a closer inspection into our configuration files, see the Gitlab repository for our cluster.
+
+\newpage
+
+\section{StatefulSets}
+
+Since LearnShell is a stateful application with two different databases (a PostgreSQL database and a Redis key-value cache store), we need a way of ensuring persistent storage in our cluster. This can be done by using StatefulSets in tandem with PersistentVolumeClaims. Better yet, one may notice that there aren't any specific demands we may ask of our databases; besides details such as setting the desired capacity of our PostgreSQL database, our databases should behave exactly like those in any other applications. As such, Helm charts are a very solid choice for our use case, as there is nothing particularly unique in what we want our databases to do, besides the obvious, which is persistent storage of data.
+
+We installed both our PostgreSQL and Redis Helm charts from the Bitnami Helm chart repository, which is maintained (among other Bitnami offerings) by VMWare since the acquisition of Bitnami in 2019. \cite{bitnami} In addition, we have used the Gitlab Helm chart repository for our Gitlab Runners; however, we have dedicated a separate section to our CI/CD process, and they will be described in that section.
+
+\subsection{PostgreSQL}
+
+\begin{figure}[H]
+\centering
+\caption{PostgreSQL Helm chart diagram}
+\hspace*{0.3cm}
 \includegraphics[scale=0.5]{postgres-diagram}
 \end{figure}
 
-\subsubsection{Redis chart}
+The above diagram shows the workloads and services generated by our Helm chart, and serves as a perfect example of a basic stateful application in a Kubernetes cluster. After the installation of the PostgreSQL chart, several resources are created; most importantly, a StatefulSet which directly creates and maintains replica Pods, and a PersistentVolumeClaim resource which dynamically allocates storage that persists even after our Pods are deleted.
+
+There are two Services in use here; a "classic" Service which enables communication between our PostgreSQL Pod and other pods (as seen in the previous section, the backend Pod establishes network communication with the postgres Pod immediately upon the start-up of its container) and a "headless" Service. A headless Service differs from a ClusterIP service (which we are using in our Deployments as well) in that it assigns an IP address to each of our pods, while a ClusterIP service assigns the same IP address to all Pods belonging to a single Deployment (or StatefulSet). \cite{kube-action} In communication between Pods and outside of our cluster, the ClusterIP service is utilized, while during the process of writing to our PostgreSQL database, we use the headless Service. This is because our StatefulSet has to watch out for potential overwrites of the data in our database, and as such it has to process each new write request individually for each Pod; as such, each Pod needs to be identified by its own IP address.
+
+In our Values file for this Helm chart, we specified the name of our database as well as the necessary credentials (although more precaution, ideally using a Secret would be preferable in a production cluster). Also, the size of our PersistentVolume (into which the PersistentVolumeClaim writes data) was defined as 20GiB.
+
+\subsection{Redis}
+
 \begin{figure}[H]
 \centering
 \caption{Redis Helm chart}
-\hspace*{-3.4cm}
+\hspace*{-4.4cm}
 \includegraphics[scale=0.5]{redis-diagram}
 \end{figure}
 
-\subsection{Secrets}
+Our second Helm chart represents our Redis cache database. Here, we can see another sizable advantage of using Helm charts, as they can be used to quickly get slightly more complex systems up and running according to best practices; in our case, Bitnami packaged a Redis system with a simple master-slave architecture, containing one Master and two Slave Pods. This is thanks to one of the great features of Kubernetes; since it was built with the goal of assuring high availability and redundancy, it is tailor-made for systems adhering to a master-slave architecture.
 
-\subsection{Configmaps}
+In practice, a Redis Master server bears the responsibility of writing new data to Redis Slaves; by continuously synchronizing data with the Redis Master, which serves as a source of truth for our system, redundancy is assured; if one Redis Slave were to cease functioning, another would take its place with no loss of data. On the another hand, for read operations, any Redis Slaves can be used, as these operations cause no changes of data in our database. \cite{redis}
+
+Similarly to our PostgreSQL chart, a headless Service is used to differentiate between Pods when writing to our PersistentVolume. Importantly, there is also one service for our Redis Master and one service for our Redis Slave to allow for seamless communication between them.
+
+\newpage
+
+\section{Networking}
+
+To enable communication between our Pods over the local cluster network as well as to expose our cluster to the internet, some networking configuration is necessary. In this section, we shall provide an overview regarding the Kubernetes resources (and their configuration) we used to achieve these goals.
+
+\subsection{Services}
+
+As was discussed in the previous chapters, a Kubernetes cluster uses Services to expose applications running on Pods to the network. There are different types of Services, each of them suited for different purposes. In summary, we make use of the following types of services in our cluster:
+
+\begin{itemize}
+  \setlength\itemsep{0em}
+  \item \textbf{ClusterIP} is the most used by far, and serves the purpose of assigning IP addresses to Pods as well as a single DNS name for a set of Pods (such as backend.learnshell.svc.cluster.local), therefore enabling our Deployments to send data to and from each other.
+  \item \textbf{NodePort} is almost the same as the ClusterIP Service, except that it also exposes our service to the internet. This Service can be accessed by specifying the IP address of the NodePort and the open port.
+  \item \textbf{LoadBalancer} also exposes the service to the internet, with the added bonus of using load balancing to control the incoming traffic more efficiently. To achieve this, it either uses the cloud provider's load balancer or a load balancer which is set up on our on-premises machine.
+\end{itemize}
+
+Lastly, we use the Ingress resource to expose our cluster to the internet by providing a specific IP address and DNS name to access our application as an user. 
 
 \subsection{Ingress}
 
-\subsubsection{Ingress chart}
 \begin{figure}[H]
 \centering
 \caption{Ingress Helm chart}
@@ -543,14 +767,39 @@ In this section, we shall present the architecture
 \includegraphics[scale=0.5]{ingress-diagram}
 \end{figure}
 
-\subsubsection{Ingress configuration}
+Much like in in the case of our StatefulSets, we have used a Helm chart to set up Ingress for our cluster. As we can see from the diagram, our configuration looks quite similar to a typical Deployment in our cluster, with an important difference in that it also uses a Service dedicated to load balancing of incoming requests.
+
+One of the most important parts of an Ingress configuration is the Ingress controller, which can be in simply terms imagined as a Deployment that facilitates the creation of Pods with specific web server technologies. In fact, there are numerous different controllers maintained as of today, with three controllers (AWS, GCP and nginx) having official support from the Kubernetes community and many more being maintained by large companies and used in projects all across the world. In this cluster, the nginx controller is used for two reasons; it is completely provider-independent and by far the most convenient to set up due to the current version of LearnShell using an nginx proxy server to forward requests to its components.
+
+\subsection{Ingress configuration}
+
+In addition to the Ingress controller, a working Ingress configuration also requires a resource that serves as a set of rules based on which requests from outside of the cluster are forwarded to specific components of the LearnShell system. These rules are outlined in a configuration file which we shall analyze in this subsection. As in the Deployment section, let us take a closer look at this file.
+
 \begin{figure}[H]
 \centering
-\caption{Ingress configuration of our cluster}
-\hspace*{-3cm}
-\includegraphics[scale=0.5]{exposed-services-diagram}
+\hspace*{0.7cm}
+\includegraphics[scale=0.5]{kube-ingress1}
 \end{figure}
 
+As in our Deployments, there are four required fields, which fulfill the same function as in any other resource:
+
+\begin{itemize}
+  \setlength\itemsep{0em}
+  \item \textbf{apiVersion} here is different from the others in our cluster; instead of v1, v1beta1 is used. The reason is that in order to make our Ingress configuration work on both GCP and on-premises, we unfortunately can not use the newest version of the Kubernetes API, as it is not supported yet by GCP. Therefore, we have to use v1beta1, an older version of the API which is quite different from v1 in regards to the syntax of configuration files. Nevertheless, as soon as cloud providers start using v1 for Ingress, there is no reason not to migrate to that version in our cluster as well.  
+  \item \textbf{kind} is much the same as anywhere else, simply denoting the kind of resource we want to create.
+  \item \textbf{annotations} provides our Ingress with additional information in regards to functionality. Here, we specified that regular expressions should be used in the rules inside our spec value, that no SSL redirection should be used at the moment as the current version of our cluster does not use HTTPS (of course, this can and will be configured once the cluster is used in production) and that we are using the nginx controller, here told inside the ingress.class key-value pair.
+  \item \textbf{name} is self-explanatory.
+\end{itemize}
+
+\begin{figure}[H]
+\centering
+\hspace*{0.7cm}
+\includegraphics[scale=0.5]{kube-ingress2}
+\end{figure}
+
+The spec field is, as usual, the longest part of our configuration file. In an Ingress resource, it mandatorily contains the rules by which our network should abide when handling requests from outside. However, there are many other options to configure, such as the DNS name that should be translated into the IP address which serves as the root of our application website. In our case, there is no host, but should the cluster be used in practice, it would be set to the current website of the LearnShell portal.
+
+In any case, we command Ingress to route any requests received via the HTTP protocol based on the specified path. The first path, which is \verb|http://<IP address of our Ingress service>/*| uses the asterisk wildcard to redirect any request to the web Pod using port 3000 (on which our JavaScript front end is exposed). In the paths below, special cases, are specified, such as \verb|/admin|. In case the request is made to that path, it is redirected directly to our back end instead. These rules are also used for static files; if the client request a CSS file within the \verb|/static/admin/css| path, for example, it is retrieved from that very folder inside thecontainer running inside of our backend Pod.
 
 
 \section{Private container registry}
@@ -562,7 +811,7 @@ Since container registries are not enabled by default on Gitlab, we need to enab
 
 Firstly, we want the Pods in our cluster to \textbf{pull} images from our registry, which shall be used as templates for the containers running within them. Secondly, in order to keep our cluster up-to-date, we want to \textbf{push} newly built images into our registry for the cluster to pull from. 
 
-To pull as well as push from a private container registry as a developer, one merely needs to authenticate using \verb|docker login <registry url>| and providing his credentials to prove he has the necessary privileges. However, to make a Pod inside our cluster pull images from that same registry automatically as part of its lifecycle, some additional configuration is needed. According to the Kubernetes documentation, a Pod should use a Secret to authenticate to private registries. Thus, we have created Secrets for each repository which is part of the LearnShell group, so that the generator deployment can pull a Docker image from the Gitlab repository containing the code for the generator, and likewise for our other deployments.
+To pull as well as push from a private container registry as a developer, one merely needs to authenticate using \verb|docker login <registry url>| and providing his credentials to prove he has the necessary privileges. However, to make a Pod inside our cluster pull images from that same registry automatically as part of its lifecycle, some additional configuration is needed. According to the Kubernetes documentation, a Pod should use a Secret to authenticate to private registries. Thus, we have created Secrets for each repository which is part of the LearnShell group, so that the generator Deployment can pull a Docker image from the Gitlab repository containing the code for the generator, and likewise for our other Deployments.
 
 The Secret should contain a key-value pair, binding the key named ".dockerconfigjson" to a value which represents a base64 encoded Docker configuration file which contains only the authentication data for our registry. See the image below for an example of such a file, which we wrote purely for didactic purposes.
 
@@ -603,7 +852,7 @@ To create a functioning CI/CD pipeline, there are two preliminary steps: writing
 
 According to the Gitlab documentation, a Gitlab Runner is an application that works with Gitlab CI to run jobs inside pipelines. This application can be deployed to several different operation systems, and it is entirely up to decide whether toinstall it as a package, container or as a Helm chart.
 
-By installing it as as Helm chart in our cluster, we not only make our work a bit easier for ourselves, as we avoid having to provision a VM for our runners, but we also make use of an extremely useful boon; as the runners would now belong to our cluster, we can configure them to have specific privileges, such as updating deployments or deleting pods. The Helm chart for a Gitlab Runner can be installed much like any other chart; one adds a chart repository (here provided by Gitlab) and installs it from the repository, optionally supplying it with a Values file. Provided below is an example of such a file.
+By installing it as as Helm chart in our cluster, we not only make our work a bit easier for ourselves, as we avoid having to provision a VM for our runners, but we also make use of an extremely useful boon; as the runners would now belong to our cluster, we can configure them to have specific privileges, such as updating Deployments or deleting Pods. The Helm chart for a Gitlab Runner can be installed much like any other chart; one adds a chart repository (here provided by Gitlab) and installs it from the repository, optionally supplying it with a Values file. Provided below is an example of such a file.
 
 \begin{figure}[H]
 \centering
@@ -649,27 +898,22 @@ As for the other repositories, their pipelines are almost completely identical t
 
 \subsection{Potential improvements}
 
-While we are quite satisfied with the our current CI/CD process, we are still slightly constrained by the version of Gitlab in use by the university. There are two features we could make use of in the future, if newer versions are used; group variables and running of jobs after a commit is merged into a branch. Currently, the environmental variable CI\_SERVICEACCOUNT\_TOKEN is the same across all repositories, since we are using the same ServiceAccount for all our runners. Therefore, it would be preferable to have a single place from which to set this variable globally for the group. Unfortunately, this is only available in the later versions of Gitlab. Furthermore, our current pipelines are devised so that their jobs only run when a commit is made into the master branch. Ideally, we would like these jobs to run only after a merge request is accepted into that branch. As with group variables, the issue lies in the fact that running jobs post-merge is not available in our version. Still, pushes into master are almost always made in the form of merges from other branches, and as such this isn't at all a pressing issue.
+While we are quite satisfied with the our current CI/CD process, we are still slightly constrained by the version of Gitlab in use by the university. There are two features we could make use of in the future, if newer versions are used; group variables and running of jobs after a commit is merged into a branch. Currently, the environmental variables KUBE\_SERVICEACCOUNT\_TOKEN and KUBE\_APISERVER are  the same across all repositories, since we are using the same ServiceAccount for all our runners. Therefore, it would be preferable to have a single place from which to set this variable globally for the group. Unfortunately, this is only available in the later versions of Gitlab. Furthermore, our current pipelines are devised so that their jobs only run when a commit is made into the master branch. Ideally, we would like these jobs to run only after a merge request is accepted into that branch. As with group variables, the issue lies in the fact that running jobs post-merge is not available in our version. Still, pushes into master are almost always made in the form of merges from other branches, and as such this isn't at all a pressing issue.
 
 As in the previous section, these improvements are merely quality of life ones; our goals are fully achieved with the tools on offer by our version of Gitlab.
-
-
-
-
-
 
 \setsecnumdepth{part}
 \chapter{Conclusion}
 
 In closing, let us walk through the goals set in this thesis. 
 
-In the first chapter, we reviewed the current infrastructure architecture of LearnShell, and proposed possible improvements, the chief one being building a cluster for scaling and load-balancing. Then, we have gone over the theoretical concepts behind modern cluster platforms, and talked about some of the most used technologies in the field. Afterwards, we analysed and scrutinized the suitability of technologies that would help us create that cluster, and used our acquired knowledge to create a project that would create a cluster from a combination of configuration files and commands, allowing the user to choose between an on-premises cluster and a cloud-based one (while discussing the pros and cons of each). Finally, as our last task, we implemented a CI/CD pipeline for each project where it was deemed necessary, by using our newly-created cluster to deploy Gitlab Runners. Additionally, we provided diagrams as well as code snippets from our project in order to shed light on our cluster infrastructure as well as our CI/CD process. 
+In the first chapter, we reviewed the current infrastructure architecture of LearnShell, and proposed possible improvements. Then, we have gone over the theoretical concepts behind modern cluster platforms, and talked about some of the most used technologies in the field. Afterwards, we analysed and scrutinized the suitability of technologies that would help us create that cluster, and used our acquired knowledge to create a project that would create a cluster from a combination of configuration files and commands, allowing the user to choose between an on-premises cluster and a cloud-based one (while discussing the pros and cons of each). Finally, as our last task, we implemented a CI/CD pipeline for each project where it was deemed necessary, by using our newly created cluster to deploy Gitlab Runners. Additionally, we provided diagrams as well as code snippets from our project in order to shed light on our cluster infrastructure as well as our CI/CD process. 
 
 In order to achieve our aims, we have used many different technologies, though there was a special focus on Docker, Kubernetes and Gitlab CI for containerization, orchestration and CI/CD respectively.
 
 The code is available for students and staff on a repository in the Gitlab server of the Czech Technical University in Prague. Moreover, we have organised the containers into private registries on Gitlab, and built pipelines around them via Gitlab CI.
 
-While we feel confident that the goals were completed, there is always room for improvement; in this current iteration, the cluster can be used in practice as a staging environment for development, but to be truly production-ready, some additional work would be required, mainly in regards to high availability. Nonetheless, we believe that in this state, LearnShell is well-situated to migrate completely to a cluster infrastructure in the near future.
+While we feel confident that the goals were completed, there is always room for improvement; in this current iteration, the cluster can be used in practice as a staging environment for development, but to be truly production-ready, some additional work would be required, mainly in regards to networking. Nonetheless, we believe that in this state, LearnShell is well-situated to migrate completely to a cluster infrastructure in the near future.
 
 
 
@@ -689,6 +933,11 @@ While we feel confident that the goals were completed, there is always room for 
 	\item{CD} Continuous Delivery
 	\item{VM} Virtual Machine
 	\item{K8S} Kubernetes
+	\item{YAML} YAML Ain't Markup Language
+	\item{JSON} JavaScript Object Notation
+	\item{CSS} Cascading Style Sheets
+	\item{HTTP} Hypertext Transfer Protocol
+	\item{HTTPS} Hypertext Transfer Protocol Secure
 	
 \end{description}
 
@@ -697,17 +946,17 @@ While we feel confident that the goals were completed, there is always room for 
 
 %change appropriately
 
-%\begin{figure}
-%	\dirtree{%
-%		.1 readme.txt\DTcomment{the file with CD contents description}.
-%		.1 exe\DTcomment{the directory with executables}.
-%		.1 src\DTcomment{the directory of source codes}.
-%		.2 wbdcm\DTcomment{implementation sources}.
-%		.2 thesis\DTcomment{the directory of \LaTeX{} source codes of the thesis}.
-%		.1 text\DTcomment{the thesis text directory}.
-%		.2 thesis.pdf\DTcomment{the thesis text in PDF format}.
-%		.2 thesis.ps\DTcomment{the thesis text in PS format}.
-%	}
-%\end{figure}
+\begin{figure}
+	\dirtree{%
+		.1 readme.txt\DTcomment{the file with CD contents description}.
+		.1 exe\DTcomment{the directory with executables}.
+		.1 src\DTcomment{the directory of source codes}.
+		.2 wbdcm\DTcomment{implementation sources}.
+		.2 thesis\DTcomment{the directory of \LaTeX{} source codes of the thesis}.
+		.1 text\DTcomment{the thesis text directory}.
+		.2 thesis.pdf\DTcomment{the thesis text in PDF format}.
+		.2 thesis.ps\DTcomment{the thesis text in PS format}.
+	}
+\end{figure}
 
 \end{document}

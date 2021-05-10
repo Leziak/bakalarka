@@ -7,6 +7,19 @@
   \urlstyle{rm}\Url}\fi
 \providecommand{\eprint}[2][]{\biburl{#2}}
 
+\bibitem{what-container}
+{Docker, Inc.} Comparing Containers and Virtual Machines. [Online]. [cit.
+  10.5.2021].
+\urlprefix\biburl{https://www.docker.com/resources/what-container}
+
+\bibitem{kube-components}
+{Google, Inc.} Kubernetes Components. [Online]. [cit. 6.5.2021].
+\urlprefix\biburl{https://kubernetes.io/docs/concepts/overview/components/}
+
+\bibitem{cicd-diagram}
+Maul, F. Locally testing Gitlab CI jobs. [Online]. [cit. 6.5.2021].
+\urlprefix\biburl{https://medium.com/fme-developer-stories/locally-testing-gitlab-ci-jobs-aeb3eb5ec4a8}
+
 \bibitem{learnshell-jilek}
 Jílek, K. \emph{Command and Script Testing System for Bash Language}. Czech
   Technical University in Prague, 2018.
@@ -39,6 +52,13 @@ Borský, J. \emph{Generátor vstupních dat pro validaci Bash skriptů}. Czech
 \bibitem{unix-handbook}
 {Nemeth E. et al.} \emph{Unix and Linux System Administration Handbook}.
   Addison-Wesley, 2018.
+
+\bibitem{what-is-high-availability}
+{Digital Ocean, Inc.} What is high availability? [Online]. [cit. 9.5.2021].
+\urlprefix\biburl{https://www.digitalocean.com/community/tutorials/what-is-high-availability}
+
+\bibitem{staging-server}
+Sharma, A. \emph{Test Environment Management}. ITSM Press, 2018.
 
 \bibitem{virtualization}
 Jain, S.~M. \emph{Linux Containers and Virtualization}. Apress, 2020.
@@ -135,11 +155,30 @@ Nagy, V. A new era of Kubernetes integrations on GitLab.com. [Online]. [cit.
 {Arundel J. and Domingus J.} \emph{Cloud Native DevOps with Kubernetes}.
   O'Reilly, 2019.
 
+\bibitem{using-helm}
+{Helm community}. Using Helm. [Online]. [cit. 10.5.2021].
+\urlprefix\biburl{https://helm.sh/docs/intro/using_helm/}
+
+\bibitem{gcr-pricing}
+{Google, Inc.} Container Registry Pricing. [Online]. [cit. 6.5.2021].
+\urlprefix\biburl{https://cloud.google.com/container-registry/pricing}
+
 \bibitem{cd-guide}
 Wolff, E. \emph{A Practical Guide to Continuous Delivery}. Addison-Wesley,
   2017.
 
 \bibitem{high-availability}
 van Vugt, S. \emph{Pro Linux High Availability Clustering}. Apress, 2014.
+
+\bibitem{bitnami}
+{Bitnami blog}. VMWare to acquire Bitnami. [Online]. [cit. 7.5.2021].
+\urlprefix\biburl{https://blog.bitnami.com/2019/05/vmware-to-acquire-bitnami.html}
+
+\bibitem{kube-action}
+Lukša, M. \emph{Kubernetes in Action}. Manning, 2017.
+
+\bibitem{redis}
+Mani, S. Highly available Redis architecture. [Online]. [cit. 9.5.2021].
+\urlprefix\biburl{https://medium.com/kokster/highly-available-redis-architecture-613c89f887b4}
 
 \end{thebibliography}
