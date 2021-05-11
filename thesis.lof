@@ -11,13 +11,13 @@
 \contentsline {figure}{\numberline {2.2}{\ignorespaces Container-based virtualization with Docker \cite {what-container}}}{14}{figure.2.2}%
 \contentsline {figure}{\numberline {2.3}{\ignorespaces Architecture of a Kubernetes cluster \cite {kube-components}}}{20}{figure.2.3}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Visualization of typical CI/CD pipelines \cite {cicd-diagram}}}{32}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces LearnShell CI/CD pipeline}}{33}{figure.3.2}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Visualization of typical CI/CD pipelines \cite {cicd-diagram}}}{33}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces LearnShell CI/CD pipeline}}{34}{figure.3.2}%
 \addvspace {10pt}
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Directory tree of the LearnShell Cluster project}}{37}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Deployments within our cluster}}{42}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces PostgreSQL Helm chart}}{47}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Redis Helm chart}}{49}{figure.4.4}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Directory tree of the LearnShell Cluster project}}{39}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Deployments within our cluster}}{44}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces PostgreSQL Helm chart}}{49}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Redis Helm chart}}{51}{figure.4.4}%
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Ingress Helm chart}}{53}{figure.4.5}%
 \addvspace {10pt}
 \addvspace {10pt}

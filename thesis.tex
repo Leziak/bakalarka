@@ -91,6 +91,8 @@ Before that, let us briefly describe its history. The first version of LearnShel
 
 Now, let us begin with an overview of the architecture. Next, we shall focus on each separate piece of the puzzle as well as the tech stack in use.
 
+\clearpage
+
 \section{Overview}
 
 The current production-ready version of LearnShell is composed of six containers that are connected to each other on their local network, alongside an evaluator service that runs on its own server. Each of those services fulfills a specific role, as we will elaborate in the following subsections. In practice, the term for this is "microservice architecture", which can be succinctly described as a collection of small, autonomous services that work together. \cite{building-microservices} 
@@ -194,6 +196,8 @@ In addition, if a batteries-included orchestration platform such as Kubernetes i
 \chapter{Containerization and Orchestration}
 
 In this chapter, we shall finally explain in detail the terms containerization and orchestration; they are of such importance to this thesis that we feel that a separate chapter is necessary to elaborate on the theoretical concepts as well as their practical applications. Finally, we will review the most used solutions for container orchestration, and at the beginning of the next chapter, we are going to compare their use cases in general and specifically to LearnShell.
+
+\clearpage
 
 \section{Theoretical concepts}
 
@@ -370,6 +374,8 @@ However, before actually execute these commands in practice, the api-server firs
 
 In this chapter, which is the first of the two that describe the practical part of this thesis, we shall explain our architectural decisions as well as the motives behind them. We will describe the technologies used and why they were necessary, and where need be, we shall compare the most viable technologies for our particular use case.
 
+\clearpage
+
 \section{Docker Swarm vs. Kubernetes}
 
 Since we will be implementing a cluster for LearnShell, one of the most important decisions we had to reach was to make an informed choice between Docker Swarm and Kubernetes as our orchestration platforms. Therefore, in this section, a comparison of Docker Swarm and Kubernetes will be made; for each platform, we shall describe the general use cases, the advantages, and disadvantages, as well as their future in the industry. Then, we will concentrate on LearnShell specifically, and reach a final decision on which platform is the best for our use case in particular.
@@ -438,7 +444,7 @@ In addition, there are several other tricky aspects than just stateful applicati
 
 \section{Private container registry}
 
-For our cluster to run Deployments, we need to provide Kubernetes with the necessary Docker images from which to create containers contained within the Pods maintained by these Deployments. For that, there is a requirement for a container registry, wherein these images will be located. Also, for security reasons, this registry should be private; since LearnShell is currently only used by the Czech Technical University, its code should not be accessible from the outside, and therefore outsiders should not be able to pull LearnShell images without any authorization. From our research of possible private container registry offerings, we have arrived at a crossroads between three alternatives:
+For our cluster to run Deployments, we need to provide Kubernetes with the necessary Docker images from which to create containers contained within the Pods maintained by these Deployments. For that, there is a requirement for a private container registry, wherein these images will be located. From our research of possible private container registry offerings, we have arrived at a crossroads between three alternatives:
 
 \begin{itemize}
   \setlength\itemsep{0em}
@@ -450,6 +456,8 @@ For our cluster to run Deployments, we need to provide Kubernetes with the neces
 Since we have deployed a cluster on Google Cloud, a natural option would be to also host our images there; it would enable easy and robust integration with our GKE-hosted Kubernetes cluster. However, there is a monthly fee of 0.026 dollars per GB per month, and we would like to avoid any monthly payments as much as possible. \cite{gcr-pricing} Therefore, we shall narrow our scope to free offerings. Out of those, we have only found two possibilities that are both free of charge as well as private. We could use a self-hosted registry, which is definitely possible. However, there are two disadvantages; since it is self-hosted, we would have to set it up, as well as maintain it manually, which could lead to trouble down the road, as we are trying to maximize automation, and therefore avoid the need for manual maintenance. Secondly, such a solution would be harder to integrate with Gitlab and its CI/CD offering; it would still be possible, but additional configuration would be necessary, increasing complexity. There is only one option that is both free, private and enables integration with Gitlab, and that is hosting the image registry on Gitlab itself, using the Gitlab Container Registry. This is also the best provider-independent option, as a DevOps pipeline on Gitlab would be easiest to improve upon by hosting the images there, as well.
 
 As such, we arrive at the conclusion that Gitlab would be the ideal option for a private container registry, especially when taking proper CI/CD routines into consideration.
+
+\clearpage
 
 \section{Continuous integration and continuous deployment}
 
@@ -714,7 +722,7 @@ We installed both our PostgreSQL and Redis Helm charts from the Bitnami Helm cha
 
 \subsection{PostgreSQL}
 
-\begin{figure}[H]
+\begin{figure}[htbp!]
 \centering
 \caption{PostgreSQL Helm chart}
 \hspace*{0.4cm}
@@ -723,11 +731,7 @@ We installed both our PostgreSQL and Redis Helm charts from the Bitnami Helm cha
 
 The above diagram shows the workloads and services generated by our Helm chart, and serves as a perfect example of a basic stateful application in a Kubernetes cluster. After the installation of the PostgreSQL chart, several resources are created; most importantly, a StatefulSet which directly creates and maintains replica Pods, and a PersistentVolumeClaim resource which dynamically allocates storage that persists even after our Pods are deleted.
 
-\clearpage
-
-There are two Services in use here; a "classic" Service which enables the communication between our PostgreSQL Pod and other pods (as seen in the previous section, the backend Pod establishes network communication with the postgres Pod immediately upon the start-up of its container) and a "headless" Service. A headless Service differs from a ClusterIP service (which we are using in our Deployments as well) in that it assigns an IP address to each of our pods, while a ClusterIP service assigns the same IP address to all Pods belonging to a single Deployment (or StatefulSet). \cite{kube-action} In communication between Pods and outside of our cluster, the ClusterIP service is utilized, while during the process of writing to our PostgreSQL database, we use the headless Service. This is because our StatefulSet has to watch out for potential overwrites of the data in our database, and as such it has to process each new write request individually for each Pod; as such, each Pod needs to be identified by its own IP address.
-
-In our Values file for this Helm chart, we specified the name of our database as well as the necessary credentials (although more precaution, ideally using a Secret would be preferable in a production cluster). Also, the size of our PersistentVolume (into which the PersistentVolumeClaim writes data) was defined as 20GiB.
+There are two Services in use here; a "classic" Service which enables the communication between our PostgreSQL Pod and other pods (as seen in the previous section, the backend Pod establishes network communication with the postgres Pod immediately upon the start-up of its container) and a "headless" Service. A headless Service differs from a ClusterIP service (which we are using in our Deployments as well) in that it assigns an IP address to each of our pods, while a ClusterIP service assigns the same IP address to all Pods belonging to a single Deployment (or StatefulSet). \cite{kube-action} In communication between Pods and outside of our cluster, the ClusterIP service is utilized, while during the process of writing to our PostgreSQL database, we use the headless Service. This is because our StatefulSet has to watch out for potential overwrites of the data in our database, and as such it has to process each new write request individually for each Pod; as such, each Pod needs to be identified by its own IP address. In our Values file for this Helm chart, we specified the name of our database as well as the necessary credentials (although more precaution, ideally using a Secret would be preferable in a production cluster). Also, the size of our PersistentVolume (into which the PersistentVolumeClaim writes data) was defined as 20GiB.
 
 \subsection{Redis}
 
@@ -743,8 +747,6 @@ Our second Helm chart represents our Redis cache database. Here, we can see anot
 In practice, a Redis Master server bears the responsibility of writing new data to Redis Slaves; by continuously synchronizing data with the Redis Master, which serves as a source of truth for our system, redundancy is assured; if one Redis Slave were to cease functioning, another would take its place with no loss of data. On the other hand, for read operations, any Redis Slaves can be used, as these operations cause no changes of data in our database. \cite{redis}
 
 Similarly to our PostgreSQL chart, a headless Service is used to differentiate between Pods when writing to our PersistentVolume. Importantly, there is also one service for our Redis Master and one service for our Redis Slave to allow for seamless communication between them.
-
-\newpage
 
 \section{Networking}
 
@@ -768,8 +770,8 @@ Lastly, we use the Ingress resource to expose our cluster to the internet by pro
 \begin{figure}[H]
 \centering
 \caption{Ingress Helm chart}
-\hspace*{1cm}
-\includegraphics[scale=0.5]{ingress-diagram}
+\hspace*{-1cm}
+\includegraphics[scale=0.6]{ingress-diagram}
 \end{figure}
 
 Much like in the case of our StatefulSets, we have used a Helm chart to set up Ingress for our cluster. As we can see from the diagram, our configuration looks quite similar to a typical Deployment in our cluster, with an important difference in that it also uses a Service dedicated to load balancing of incoming requests.
