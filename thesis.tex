@@ -157,7 +157,7 @@ Orchestration technologies were built exactly with high availability in mind; by
 
 \subsection{Load balancing}
 
-To follow up on the previous subsection, load balancing should be mentioned as another powerful feature of architectures that run several replicas of their components. By creating and configuring the network of our cluster, we can make our cluster manage the incoming traffic, that is web requests of all kinds, in a resourceful way. For example, in case of an unusually high amount of requests, load balancing algorithms would redirect these requests to those workloads within the cluster that are least burdened at the moment, balancing the number of requests and ensuring that there are minimal bottlenecks.
+To follow up on the previous subsection, load balancing should be mentioned as another powerful feature of architectures that run several replicas of their components. Generally, load balancing is defined as the methodical and efficient distribution of network traffic across multiple servers in a server farm; in our case, we may replace the word "server" with "workload" and "server farm" with "cluster". \cite{citrix} By creating and configuring the network of our cluster, we can make our cluster manage the incoming traffic, that is web requests of all kinds, in a resourceful way. For example, in case of an unusually high amount of requests, load balancing algorithms would redirect these requests to those workloads within the cluster that are least burdened at the moment, balancing the number of requests and ensuring that there are minimal bottlenecks.
 
 It should be noted that by itself, the nginx server used by LearnShell has load balancing capabilities. However our architecture falls short by not utilizing multiple replicas for critical parts of the application, and as such there can be no real distribution of the requests being received by LearnShell at the moment.
 
@@ -215,6 +215,8 @@ Later on, at the tail end of the century, a newer virtualization model to provid
 However, VM-based virtualization still effectively “carves out” a part of the hardware resources of the physical server, as it creates a full-fledged operating system that treats its allocated hardware as if it was the only operating system running on it.
 
 With the advent of Docker, container-based virtualization (henceforth referred to as containerization) turned into an extremely popular virtualization technique, which we shall describe in the following chapter. 
+
+\clearpage
 
 
 \subsection{Containerization}
@@ -280,6 +282,8 @@ The architecture of a swarm consists of several Docker hosts, that is servers (b
 In order to allow each node to transfer data between them, a network can be established by using the overlay network driver as well as the bridge network driver. The overlay network driver, also called ingress, handles traffic to a swarm service from outside, while the bridge network driver connects the Docker daemon one host to another Docker daemon on another host. 
 Finally, it is worth noting that Docker Swarm plays with other tools in the Docker ecosystem; an example worth mentioning would be Docker Stack, which can be used with a YAML file to quickly deploy a swarm. The structure of this file is extremely similar to a docker-compose.yml file, with minimal differences, such as specifying manager and worker nodes. If we were not using Kubernetes in this project, we would definitely be writing a stack definition file and running it via Docker Stack n order to create a swarm. 
 
+\clearpage
+
 \section{Kubernetes}
 
 In this section, we will dive deep into the inner workings of Kubernetes, our orchestration platform of choice. Due to the sheer depth of the Kubernetes platform, we have dedicated an entire section to this technology. For the reasons why we shall be using Kubernetes in our LearnShell cluster, see the next chapter, specifically the section "Docker Swarm vs Kubernetes". The reader might notice that this section is quite a bit longer than the one dedicated to Docker Swarm; this is not only due to Kubernetes being a more complex piece of software, and also to serve as a sort of glossary to return to from the implementation chapter, which will not be jam-packed with theory.
@@ -326,7 +330,7 @@ Now that we have described the architecture of a typical Kubernetes cluster, let
 
 \subsection{Building blocks}
 
-The complexity of Kubernetes starts to show in this subsection; there are numerous different resources that one has to be acquainted with in order to create a cluster of some complexity. As a general rule in the Kubernetes community, these resources can be divided into workloads and other types of resources, typically related to the configuration of workloads. A workload can be defined simply as an application running on our cluster at least for some time, somewhat synonymous with the general definition of a microservice. \cite{kube-workloads} For the sake of not going into too much detail, we shall only describe in detail these resources which we would be making use of in our cluster; that would be the majority of commonly used resources in any case. In our implementation chapter are some diagrams of the cluster that may shed light on the general relationship between resources.
+The complexity of Kubernetes starts to show in this subsection; there are numerous different resources that one has to be acquainted with in order to create a cluster of some complexity. As a general rule in the Kubernetes community, these resources can be divided into workloads and other types of resources, typically related to the configuration of workloads. A workload can be defined simply as an application running on our cluster at least for some time, somewhat synonymous with the general definition of a microservice. \cite{kube-workloads} In our implementation chapter are some diagrams of the cluster that may shed light on the general relationship between resources.
 
 Let us begin by describing the workloads:
 
@@ -496,6 +500,8 @@ In this final chapter of our thesis, we shall focus completely on the practical 
 
 Importantly, the cluster which we shall be focusing on in this chapter is the one running on Google Cloud, however, there is no difference between the on-premises cluster implementation and the cloud one; this is merely the personal preference of the author, as the user interface of Google Cloud proves to be really helpful for debugging. Lastly, one may notice that our cluster implementation does not contain the LearnShell evaluator. This is because the evaluator has not yet been containerized to issues outlined in the first chapter. Once a containerized evaluator is implemented, it is not at all difficult to include it in our cluster. As of right now, however, the cluster can work with the evaluator server instead, although some additional configuration may or may not be needed.
 
+\clearpage
+
 \section{Technologies}
 
 To start off, let us briefly summarize the main technologies we have made use of after our analysis:
@@ -513,7 +519,7 @@ To start off, let us briefly summarize the main technologies we have made use of
 
 As a side note, we have used Linux as our operating system of choice both locally and on the cloud, due to its seamless integration with Docker. On Google Cloud, we have deployed three VMs running Debian, as it is the distribution we are most familiar with. These VMs were provisioned automatically by GKE to function as nodes for our cluster. As for the on-premises, implementation, we are currently running it on Minikube; however, a Minikube cluster is not quite fit for production, since it is only a single-node cluster tailor-made for local development. On the other hand, hosting a cluster on the cloud makes it far more viable for production right off the bat, as we have the option of adding and removing nodes as we see fit (alongside lots of other features), and as such we can create a cluster optimized for high-availability, allowing for drastic performance improvements by utilizing resources of multiple machines (or nodes, in the Kubernetes nomenclature) as well as protecting us from disasters such as node crashes by having other nodes step in before the crashed node recovers. \cite{high-availability}
 
-Less importantly, we have used Vim as our text editor due to its ease of use when editing configuration files and availability on machines on the cloud. Also, we have used Bash in our build script for its prevalence in the Linux world.
+Less importantly,  Vim was used as our text editor due to its ease of use when editing configuration files and availability on machines on the cloud. Also, we have used Bash in our build script for its prevalence in the Linux world.
 
 
 \section{Project structure}
@@ -522,6 +528,7 @@ Let us continue with a brief overview of the project structure of the repository
 
 \begin{figure}[H]
 \caption{Directory tree of the LearnShell Cluster project}
+\hspace*{3.5cm}
 \includegraphics[scale=0.5]{tree}
 \end{figure}
 
@@ -568,7 +575,7 @@ By far the simplest of the three, \verb|make help| merely outputs a list of comm
 
 Moving on, the \verb|make clean| task deletes all workloads in the "learnshell" namespace, which is the reserved namespace of our cluster. It does so by calling \verb|./build.sh clean|, which in turn calls the function described above and exits immediately. The code itself is rather self-explanatory; first, we delete all workloads within the cluster, then we uninstall our Helm charts in order to be able to reinstall them completely in the future.
 
-This function serves another important role, as we have configured our build script to call it every time an error occurs within the creation of the cluster. The advantage of this is that there are no side effects in case of any failures during the build process, and one can call the build script without worrying about polluting the namespace in case of any complications.
+This function serves another important role, as we have configured our build script to call it every time an error occurs within the creation of the cluster. The advantage of this is that there are no side effects related to workloads in case of failures during the build process, and one can call the build script without worrying about polluting the namespace in case of any complications.
 
 \subsection{make}
 
@@ -695,24 +702,28 @@ Furthermore, let us walk through the \textbf{containers} field, which contains a
 
 As for our other Deployments, their YAML configurations all follow a very similar pattern to the one we just demonstrated. Each Deployment has its own unique name and its own unique template by which Pods are created, with different ports, start-up scripts, and of course, Docker images. For a closer inspection into our configuration files, see the Gitlab repository for our cluster.
 
-\newpage
+\clearpage
 
 \section{StatefulSets}
 
 Since LearnShell is a stateful application with two different databases (a PostgreSQL database and a Redis key-value cache store), we need a way of ensuring persistent storage in our cluster. This can be done by using StatefulSets in tandem with PersistentVolumeClaims. Better yet, one may notice that there aren't any specific demands we may ask of our databases; besides details such as setting the desired capacity of our PostgreSQL database, our databases should behave exactly like those in any other applications. As such, Helm charts are a very solid choice for our use case, as there is nothing particularly unique in what we want our databases to do, besides the obvious, which is persistent storage of data.
 
-We installed both our PostgreSQL and Redis Helm charts from the Bitnami Helm chart repository, which is maintained (among other Bitnami offerings) by VMWare since the acquisition of Bitnami in 2019. \cite{bitnami} In addition, we have used the Gitlab Helm chart repository for our Gitlab Runners; however, we have dedicated a separate section to our CI/CD process, and they will be described in that section.
+We installed both our PostgreSQL and Redis Helm charts from the Bitnami Helm chart repository, which is maintained (among other Bitnami offerings) by VMWare since the acquisition of Bitnami in 2019. \cite{bitnami} In addition, we have used the Gitlab Helm chart repository for our Gitlab Runners; however, we have dedicated a separate section to our CI/CD process, where they will be expanded upon.
+
+\clearpage
 
 \subsection{PostgreSQL}
 
 \begin{figure}[H]
 \centering
-\caption{PostgreSQL Helm chart diagram}
-\hspace*{0.3cm}
-\includegraphics[scale=0.5]{postgres-diagram}
+\caption{PostgreSQL Helm chart}
+\hspace*{0.4cm}
+\includegraphics[scale=0.6]{postgres-diagram}
 \end{figure}
 
 The above diagram shows the workloads and services generated by our Helm chart, and serves as a perfect example of a basic stateful application in a Kubernetes cluster. After the installation of the PostgreSQL chart, several resources are created; most importantly, a StatefulSet which directly creates and maintains replica Pods, and a PersistentVolumeClaim resource which dynamically allocates storage that persists even after our Pods are deleted.
+
+\clearpage
 
 There are two Services in use here; a "classic" Service which enables the communication between our PostgreSQL Pod and other pods (as seen in the previous section, the backend Pod establishes network communication with the postgres Pod immediately upon the start-up of its container) and a "headless" Service. A headless Service differs from a ClusterIP service (which we are using in our Deployments as well) in that it assigns an IP address to each of our pods, while a ClusterIP service assigns the same IP address to all Pods belonging to a single Deployment (or StatefulSet). \cite{kube-action} In communication between Pods and outside of our cluster, the ClusterIP service is utilized, while during the process of writing to our PostgreSQL database, we use the headless Service. This is because our StatefulSet has to watch out for potential overwrites of the data in our database, and as such it has to process each new write request individually for each Pod; as such, each Pod needs to be identified by its own IP address.
 
@@ -723,7 +734,7 @@ In our Values file for this Helm chart, we specified the name of our database as
 \begin{figure}[H]
 \centering
 \caption{Redis Helm chart}
-\hspace*{-4.4cm}
+\hspace*{-2.2cm}
 \includegraphics[scale=0.5]{redis-diagram}
 \end{figure}
 

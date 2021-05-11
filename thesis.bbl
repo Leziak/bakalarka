@@ -61,6 +61,10 @@ Borský, J. \emph{Generátor vstupních dat pro validaci Bash skriptů}.
   9.5.2021].
 \urlprefix\biburl{https://www.digitalocean.com/community/tutorials/what-is-high-availability}
 
+\bibitem{citrix}
+{Citrix, Inc.} What is load balancing? [Online]. [cit. 11.5.2021].
+\urlprefix\biburl{https://www.citrix.com/solutions/app-delivery-and-security/load-balancing/what-is-load-balancing.html}
+
 \bibitem{staging-server}
 Sharma, A. \emph{Test Environment Management}. ITSM Press, 2018, ISBN
   9781912651269.

@@ -33,7 +33,7 @@
 \contentsline {subsection}{\numberline {2.2.1}Docker}{16}{subsection.2.2.1}%
 \contentsline {subsection}{\numberline {2.2.2}Docker Compose}{17}{subsection.2.2.2}%
 \contentsline {subsection}{\numberline {2.2.3}Docker Swarm}{17}{subsection.2.2.3}%
-\contentsline {section}{\numberline {2.3}Kubernetes}{18}{section.2.3}%
+\contentsline {section}{\numberline {2.3}Kubernetes}{19}{section.2.3}%
 \contentsline {subsection}{\numberline {2.3.1}History}{19}{subsection.2.3.1}%
 \contentsline {subsection}{\numberline {2.3.2}Architecture}{20}{subsection.2.3.2}%
 \contentsline {subsection}{\numberline {2.3.3}Building blocks}{21}{subsection.2.3.3}%
@@ -47,7 +47,7 @@
 \contentsline {section}{\numberline {3.4}Private container registry}{31}{section.3.4}%
 \contentsline {section}{\numberline {3.5}Continuous integration and continuous deployment}{32}{section.3.5}%
 \contentsline {chapter}{\chapternumberline {4}LearnShell Cluster Implementation}{35}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Technologies}{35}{section.4.1}%
+\contentsline {section}{\numberline {4.1}Technologies}{36}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Project structure}{36}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Functionality}{38}{section.4.3}%
 \contentsline {subsection}{\numberline {4.3.1}Documentation}{38}{subsection.4.3.1}%
@@ -58,21 +58,21 @@
 \contentsline {section}{\numberline {4.5}Deployments}{41}{section.4.5}%
 \contentsline {subsection}{\numberline {4.5.1}Deployment configuration}{43}{subsection.4.5.1}%
 \contentsline {section}{\numberline {4.6}StatefulSets}{46}{section.4.6}%
-\contentsline {subsection}{\numberline {4.6.1}PostgreSQL}{48}{subsection.4.6.1}%
-\contentsline {subsection}{\numberline {4.6.2}Redis}{51}{subsection.4.6.2}%
-\contentsline {section}{\numberline {4.7}Networking}{53}{section.4.7}%
-\contentsline {subsection}{\numberline {4.7.1}Services}{53}{subsection.4.7.1}%
-\contentsline {subsection}{\numberline {4.7.2}Ingress}{55}{subsection.4.7.2}%
-\contentsline {subsection}{\numberline {4.7.3}Ingress configuration}{56}{subsection.4.7.3}%
-\contentsline {section}{\numberline {4.8}Private container registry}{58}{section.4.8}%
-\contentsline {subsection}{\numberline {4.8.1}Authentication}{58}{subsection.4.8.1}%
-\contentsline {subsection}{\numberline {4.8.2}Potential improvements}{59}{subsection.4.8.2}%
-\contentsline {section}{\numberline {4.9}CI/CD implementation}{60}{section.4.9}%
-\contentsline {subsection}{\numberline {4.9.1}Gitlab Runners}{60}{subsection.4.9.1}%
-\contentsline {subsection}{\numberline {4.9.2}CI/CD pipeline configuration}{61}{subsection.4.9.2}%
-\contentsline {subsection}{\numberline {4.9.3}Potential improvements}{63}{subsection.4.9.3}%
-\contentsline {chapter}{Conclusion}{65}{chapter*.9}%
-\contentsline {chapter}{Bibliography}{67}{chapter*.10}%
-\contentsline {appendix}{\chapternumberline {A}Acronyms}{71}{appendix.A}%
-\contentsline {appendix}{\chapternumberline {B}Kubernetes diagram legend}{73}{appendix.B}%
-\contentsline {appendix}{\chapternumberline {C}Contents of enclosed CD}{75}{appendix.C}%
+\contentsline {subsection}{\numberline {4.6.1}PostgreSQL}{47}{subsection.4.6.1}%
+\contentsline {subsection}{\numberline {4.6.2}Redis}{49}{subsection.4.6.2}%
+\contentsline {section}{\numberline {4.7}Networking}{51}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Services}{51}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Ingress}{53}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}Ingress configuration}{54}{subsection.4.7.3}%
+\contentsline {section}{\numberline {4.8}Private container registry}{56}{section.4.8}%
+\contentsline {subsection}{\numberline {4.8.1}Authentication}{56}{subsection.4.8.1}%
+\contentsline {subsection}{\numberline {4.8.2}Potential improvements}{57}{subsection.4.8.2}%
+\contentsline {section}{\numberline {4.9}CI/CD implementation}{58}{section.4.9}%
+\contentsline {subsection}{\numberline {4.9.1}Gitlab Runners}{58}{subsection.4.9.1}%
+\contentsline {subsection}{\numberline {4.9.2}CI/CD pipeline configuration}{59}{subsection.4.9.2}%
+\contentsline {subsection}{\numberline {4.9.3}Potential improvements}{61}{subsection.4.9.3}%
+\contentsline {chapter}{Conclusion}{63}{chapter*.9}%
+\contentsline {chapter}{Bibliography}{65}{chapter*.10}%
+\contentsline {appendix}{\chapternumberline {A}Acronyms}{69}{appendix.A}%
+\contentsline {appendix}{\chapternumberline {B}Kubernetes diagram legend}{71}{appendix.B}%
+\contentsline {appendix}{\chapternumberline {C}Contents of enclosed CD}{73}{appendix.C}%
